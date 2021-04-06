@@ -15,3 +15,4 @@ public class DropSpot {
         this.coordinates = coordinates;
     }
 }
+
