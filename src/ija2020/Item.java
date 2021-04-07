@@ -1,8 +1,10 @@
-package sample;
+package ija2020;
 
 public class Item {
     private StoreGoods store;
     private double weight;
+
+    public Item() {}
 
     public Item(StoreGoods type, double weight) throws Exception {
         if (weight <= 0.0)

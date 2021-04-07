@@ -1,12 +1,14 @@
-package sample;
+package ija2020;
 
 import java.util.LinkedList;
 
 public class StoreGoods {
-    private LinkedList<Item> itemsList;
     private String name;
+    private LinkedList<Item> itemsList;
     private Coordinates coordinates;
     private Isle isle;
+
+    public StoreGoods() {}
 
     public StoreGoods(String name, Coordinates cords, Isle isle) {
         itemsList = new LinkedList<>();

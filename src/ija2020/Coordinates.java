@@ -1,10 +1,12 @@
-package sample;
+package ija2020;
 
 import java.util.Objects;
 
 public class Coordinates {
     private double x;
     private double y;
+
+    public Coordinates() {}
 
     public Coordinates(double x, double y) {
         this.x = x;

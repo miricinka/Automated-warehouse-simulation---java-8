@@ -1,10 +1,12 @@
-package sample;
+package ija2020;
 
 import java.util.LinkedList;
 
 public class Order {
     LinkedList<Item> toDoList;
     LinkedList<Item> doneList;
+
+    public Order() {}
 
     public Order(LinkedList<Item> toDoList) {
         this.toDoList = toDoList;

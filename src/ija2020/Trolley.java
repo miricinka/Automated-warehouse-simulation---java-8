@@ -1,4 +1,4 @@
-package sample;
+package ija2020;
 
 import java.util.LinkedList;
 
@@ -8,6 +8,8 @@ public class Trolley {
     private Order order;
     private LinkedList<Item> carriedItemsList;
     private Coordinates coordinates;
+
+    public Trolley() {}
 
     public Trolley(double capacity, Coordinates coordinates) {
         this.capacity = capacity;

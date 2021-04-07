@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="ija-app" default="compile">
+  <property name="src.dir" location="src"/>
+  <property name="build.dir" location="build"/>
+  <property name="dist.dir" location="dest"/>
+  <property name="doc.dir" location="doc"/>
+  <property name="lib.dir" location="lib"/>
+  <property name="res.dir" location="resources"/>
+  <property name="jar.name" value="ija-app"/>
+
+  <path id="classpath">
+    <pathelement location="${lib.dir}/jackson-core-2.11.0.jar"/>
+    <pathelement location="${lib.dir}/jackson-dataformat-yaml-2.11.0.jar"/>
+    <pathelement location="${lib.dir}/jackson-annotations-2.11.0.jar"/>
+    <pathelement location="${lib.dir}/jackson-databind-2.11.0.jar"/>
+    <pathelement location="${lib.dir}/snakeyaml-1.26.jar"/>
+  </path>
+
+  <target name="clean">
+    <delete dir="${build.dir}"/>
+  </target>
+  <target name="createFileStructure">
+    <mkdir dir="${build.dir}"/>
+  </target>
+
+  <target name="compile" depends="clean, createFileStructure, docs">
+    <javac includeantruntime="false" srcdir="${src.dir}" destdir="${build.dir}">
+      <classpath>
+        <path refid="classpath" />
+      </classpath>
+    </javac>
+    <jar destfile="${dist.dir}\${jar.name}.jar" basedir="${build.dir}">
+      <fileset dir="${res.dir}"/>
+      <manifest>
+        <attribute name="Main-Class" value="ija2020.Main"/>
+      </manifest>
+      <zipgroupfileset dir="${lib.dir}" includes="**/*.jar"/>
+    </jar>
+  </target>
+
+  <target name="docs">
+    <javadoc sourcepath="${src.dir}" destdir="${doc.dir}">
+      <classpath>
+        <path refid="classpath"/>
+      </classpath>
+    </javadoc>
+  </target>
+
+  <target name="run">
+    <java jar="${dist.dir}/${jar.name}.jar" fork="true"/>
+  </target>
+</project>

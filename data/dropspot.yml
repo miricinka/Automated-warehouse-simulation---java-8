@@ -1,0 +1,49 @@
+dropSpot:
+  coordinates:
+    x: 15.0
+    y: 15.0
+trolleys:
+  - &Trolley0
+    capacity: 100.0
+    usedCapacity: 0.0
+    order: null
+    carriedItemsList: null
+    coordinates:
+      x: 15.00
+      y: 15.00
+isles:
+  - &Isle0
+    start:
+      x: 15.0
+      y: 15.0
+    end:
+      x: 15.0
+      y: 100.0
+    storeGoodsList:
+      - &storeGoods0
+        name: Jablka
+        itemsList:
+          - &Item0
+            weight: 1.0
+          - &Item1
+            weight: 2.0
+          - &Item2
+            weight: 1.5
+        coordinates:
+          x: 15.0
+          y: 30.0
+      - &storeGoods1
+        name: Stoly
+        itemsList:
+          - &Item0
+            weight: 50.0
+          - &Item1
+            weight: 40.0
+          - &Item2
+            weight: 25.0
+        coordinates:
+          x: 15.0
+          y: 60.0
+    closed: false
+
+

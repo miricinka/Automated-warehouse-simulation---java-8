@@ -1,4 +1,4 @@
-package sample;
+package ija2020;
 
 public class Controller {
 }

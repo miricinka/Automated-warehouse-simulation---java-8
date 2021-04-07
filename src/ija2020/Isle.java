@@ -1,4 +1,4 @@
-package sample;
+package ija2020;
 
 import java.util.LinkedList;
 import java.util.Objects;
@@ -8,6 +8,8 @@ public class Isle {
     private Coordinates end;
     private LinkedList<StoreGoods> storeGoodsList;
     private Boolean closed;
+
+    public Isle() {}
 
     public Isle(Coordinates start, Coordinates end) {
         this.start = start;
