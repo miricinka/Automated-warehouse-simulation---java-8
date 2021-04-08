@@ -6,15 +6,17 @@ public class StoreGoods {
     private String name;
     private LinkedList<Item> itemsList;
     private Coordinates coordinates;
+    private Coordinates stopCoordinates;
     private Isle isle;
 
     public StoreGoods() {}
 
-    public StoreGoods(String name, Coordinates cords, Isle isle) {
+    public StoreGoods(String name, Coordinates cords, Isle isle, Coordinates stopCoordinates) {
         itemsList = new LinkedList<>();
         this.name = name;
         this.coordinates = cords;
         this.isle = isle;
+        this.stopCoordinates = stopCoordinates;
     }
 
     public String getName() {
@@ -47,6 +49,14 @@ public class StoreGoods {
 
     public void setIsle(Isle isle) {
         this.isle = isle;
+    }
+
+    public Coordinates getStopCoordinates() {
+        return stopCoordinates;
+    }
+
+    public void setStopCoordinates(Coordinates stopCoordinates) {
+        this.stopCoordinates = stopCoordinates;
     }
 
     public LinkedList<Item> getItemsList() {

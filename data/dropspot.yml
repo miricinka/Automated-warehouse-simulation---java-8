@@ -30,6 +30,9 @@ isles:
           - &Item2
             weight: 1.5
         coordinates:
+          x: 25.0
+          y: 30.0
+        stopCoordinates:
           x: 15.0
           y: 30.0
       - &storeGoods1
@@ -42,6 +45,9 @@ isles:
           - &Item2
             weight: 25.0
         coordinates:
+          x: 25.0
+          y: 60.0
+        stopCoordinates:
           x: 15.0
           y: 60.0
     closed: false
