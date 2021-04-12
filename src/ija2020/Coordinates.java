@@ -2,6 +2,13 @@ package ija2020;
 
 import java.util.Objects;
 
+/**
+ * Coordinates class
+ * @version 1.0
+ * @author <a href="xkolar76@stud.fit.vutbr.cz">Mirka Kolarikova</a>
+ * @author <a href="xzovin00@stud.fit.vutbr.cz">Martin Zovinec</a>
+ */
+
 public class Coordinates {
     private double x;
     private double y;
@@ -13,18 +20,34 @@ public class Coordinates {
         this.y = y;
     }
 
+    /**
+     * Returns x coordinate
+     * @return x coordinate
+     */
     public double getX() {
         return x;
     }
 
+    /**
+     * Sets coordinate x
+     * @param x coordinate
+     */
     public void setX(double x) {
         this.x = x;
     }
 
+    /**
+     * Returns coordinate y
+     * @return coordinate y
+     */
     public double getY() {
         return y;
     }
 
+    /**
+     * Sets coordinate y
+     * @param y coordinate
+     */
     public void setY(double y) {
         this.y = y;
     }

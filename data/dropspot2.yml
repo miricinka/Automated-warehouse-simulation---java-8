@@ -1,0 +1,250 @@
+dropSpot:
+  coordinates:
+    x: 15.0
+    y: 15.0
+trolleys:
+  - &Trolley0
+    capacity: 100.0
+    usedCapacity: 0.0
+    order: null
+    carriedItemsList: null
+    coordinates:
+      x: 70.00
+      y: 90.00
+isles:
+  - &Isle0
+    start:
+      x: 70.0
+      y: 60.0
+    end:
+      x: 70.0
+      y: 440.0
+    closed: false
+    storeGoodsList:
+      - &storeGoods0
+        name: Jablko
+        itemWeight: 1.0
+        itemsList:
+          - &Item0
+          - &Item1
+          - &Item2
+          - &Item3
+          - &Item4
+          - &Item5
+        coordinates:
+          x: 20.0
+          y: 60.0
+        stopCoordinates:
+          x: 70.0
+          y: 90.0
+      - &storeGoods1
+        name: Stůl
+        itemWeight: 30.0
+        itemsList:
+          - &Item0
+          - &Item1
+          - &Item2
+          - &Item4
+        coordinates:
+          x: 20.0
+          y: 120.0
+        stopCoordinates:
+          x: 70.0
+          y: 150.0
+      - &storeGoods2
+        name: Hruška
+        itemWeight: 2.0
+        itemsList:
+          - &Item0
+          - &Item1
+          - &Item2
+        coordinates:
+          x: 20.0
+          y: 180.0
+        stopCoordinates:
+          x: 70.0
+          y: 210.0
+      - &storeGoods3
+        name: Pomeranč
+        itemWeight: 2.0
+        itemsList:
+          - &Item0
+          - &Item1
+          - &Item2
+          - &Item3
+          - &Item4
+          - &Item5
+          - &Item6
+          - &Item7
+          - &Item8
+        coordinates:
+          x: 20.0
+          y: 260.0
+        stopCoordinates:
+          x: 70.0
+          y: 290.0
+      - &storeGoods4
+        name: Ananas
+        itemWeight: 3.0
+        itemsList:
+          - &Item0
+          - &Item1
+          - &Item2
+        coordinates:
+          x: 20.0
+          y: 320.0
+        stopCoordinates:
+          x: 70.0
+          y: 350.0
+      - &storeGoods5
+        name: Bambus
+        itemWeight: 4.0
+        itemsList:
+          - &Item0
+          - &Item1
+        coordinates:
+          x: 20.0
+          y: 380.0
+        stopCoordinates:
+          x: 70.0
+          y: 380.0
+      - &storeGoods6
+        name: Nálepky
+        itemWeight: 0.5
+        itemsList:
+          - &Item0
+          - &Item1
+          - &Item2
+          - &Item3
+          - &Item4
+          - &Item5
+          - &Item6
+        coordinates:
+          x: 80.0
+          y: 60.0
+        stopCoordinates:
+          x: 70.0
+          y: 90.0
+      - &storeGoods7
+        name: Podsedák
+        itemWeight: 2.0
+        itemsList:
+          - &Item0
+          - &Item1
+          - &Item2
+          - &Item3
+          - &Item4
+          - &Item5
+          - &Item6
+          - &Item7
+          - &Item8
+        coordinates:
+          x: 80.0
+          y: 120.0
+        stopCoordinates:
+          x: 70.0
+          y: 150.0
+      - &storeGoods8
+        name: Talíř
+        itemWeight: 1.0
+        itemsList:
+          - &Item0
+          - &Item1
+          - &Item2
+          - &Item3
+          - &Item4
+          - &Item5
+          - &Item6
+        coordinates:
+          x: 80.0
+          y: 180.0
+        stopCoordinates:
+          x: 70.0
+          y: 210.0
+      - &storeGoods9
+        name: Miska
+        itemWeight: 1.5
+        itemsList:
+          - &Item0
+          - &Item1
+          - &Item2
+          - &Item3
+          - &Item4
+        coordinates:
+          x: 80.0
+          y: 260.0
+        stopCoordinates:
+          x: 70.0
+          y: 290.0
+      - &storeGoods10
+        name: Voňavka
+        itemWeight: 0.5
+        itemsList:
+          - &Item0
+          - &Item1
+          - &Item2
+          - &Item3
+          - &Item4
+        coordinates:
+          x: 80.0
+          y: 320.0
+        stopCoordinates:
+          x: 70.0
+          y: 350.0
+      - &storeGoods11
+        name: Morče
+        itemWeight: 3.0
+        itemsList:
+          - &Item0
+          - &Item1
+          - &Item2
+          - &Item3
+          - &Item4
+        coordinates:
+          x: 80.0
+          y: 380.0
+        stopCoordinates:
+          x: 70.0
+          y: 410.0
+  - &Isle1
+    start:
+      x: 20.0
+      y: 250.0
+    end:
+      x: 480.0
+      y: 250.0
+    closed: false
+    storeGoodsList: null
+orders:
+  - &Order1
+    id: Jana Novakova
+    toDoList:
+      - &Item0
+        store:
+          name: Jablko
+      - &Item1
+        store:
+          name: Jablko
+      - &Item2
+        store:
+          name: Bambus
+      - &Item0
+        store:
+          name: Morče
+  - &Order2
+    id: Maruš Young
+    toDoList:
+      - &Item0
+        store:
+          name: Voňavka
+      - &Item1
+        store:
+          name: Miska
+      - &Item2
+        store:
+          name: Hruška
+      - &Item0
+        store:
+          name: Stůl
+
+

@@ -6,8 +6,8 @@ import java.util.Objects;
 public class Isle {
     private Coordinates start;
     private Coordinates end;
-    private LinkedList<StoreGoods> storeGoodsList;
     private Boolean closed;
+    private LinkedList<StoreGoods> storeGoodsList;
 
     public Isle() {}
 

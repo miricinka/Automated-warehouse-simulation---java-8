@@ -3,6 +3,7 @@ package ija2020;
 import java.util.LinkedList;
 
 public class Order {
+    String id;
     LinkedList<Item> toDoList;
     LinkedList<Item> doneList;
 
@@ -11,6 +12,14 @@ public class Order {
     public Order(LinkedList<Item> toDoList) {
         this.toDoList = toDoList;
         this.doneList = new LinkedList<>();
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public LinkedList<Item> getToDoList() {
