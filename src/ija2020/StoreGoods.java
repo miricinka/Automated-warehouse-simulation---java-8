@@ -30,7 +30,7 @@ public class StoreGoods {
 
     /**
      * Returns StoreGoods name of product
-     * @return name
+     * @return name of product
      */
     public String getName() {
         return name;
@@ -72,7 +72,7 @@ public class StoreGoods {
 
     /**
      * Sets coordinates of the shelf
-     * @param coordinates
+     * @param coordinates coordinates of shelf
      */
     public void setCoordinates(Coordinates coordinates) {
         this.coordinates = coordinates;
@@ -80,7 +80,7 @@ public class StoreGoods {
 
     /**
      * Adds new item to the list of items
-     * @param newItem
+     * @param newItem one new item
      */
     public void addNewItem(Item newItem) {
         itemsList.add(newItem);
@@ -94,26 +94,50 @@ public class StoreGoods {
         return itemsList.pollLast();
     }
 
+    /**
+     * Returns Isle this shelf belongs to
+     * @return isle it belongs to
+     */
     public Isle getIsle() {
         return isle;
     }
 
+    /**
+     * Sets Isle it belongs to
+     * @param isle it belongs to
+     */
     public void setIsle(Isle isle) {
         this.isle = isle;
     }
 
+    /**
+     * Returns coordinates where the trolley stops
+     * @return coordinates where the trolley stops
+     */
     public Coordinates getStopCoordinates() {
         return stopCoordinates;
     }
 
+    /**
+     * Sets coordinates where the trolley stops
+     * @param stopCoordinates where the trolley stops
+     */
     public void setStopCoordinates(Coordinates stopCoordinates) {
         this.stopCoordinates = stopCoordinates;
     }
 
+    /**
+     * Gets all items in shelf
+     * @return list of items in this shelf
+     */
     public LinkedList<Item> getItemsList() {
         return itemsList;
     }
 
+    /**
+     * Sets list of items in this shelf
+     * @return coordinates where the trolley stops
+     */
     public void setItemsList(LinkedList<Item> itemsList) {
         this.itemsList = itemsList;
     }
