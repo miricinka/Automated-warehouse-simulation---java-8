@@ -6,8 +6,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.scene.shape.*;
 import javafx.stage.Modality;
@@ -28,6 +30,9 @@ import static javafx.scene.paint.Color.*;
 public class Controller {
     @FXML
     private AnchorPane textPanel;
+    @FXML
+    private Pane mainPane;
+
     private WarehouseData warehouseData;
     private Rectangle lastClickedShelf;
     private Circle lastClickedTrolley;
@@ -44,6 +49,7 @@ public class Controller {
         System.out.println(allGoodsList);
     }
 
+
     /**
      * Paints all Isles and Goods from warehouseData
      * Shows info on mouse entered and exited
@@ -57,14 +63,14 @@ public class Controller {
             Line line = new Line(isle.getStart().getX(), isle.getStart().getY(), isle.getEnd().getX(), isle.getEnd().getY());
             line.setStrokeWidth(4);
             line.setStroke(SLATEGRAY);
-            root.getChildren().add(line);
+            mainPane.getChildren().add(line);
             if (isle.getStoreGoodsList() != null) {
                 for (StoreGoods storeGoods : isle.getStoreGoodsList()) {
                     Rectangle shelf = new Rectangle(storeGoods.getCoordinates().getX(), storeGoods.getCoordinates().getY(), 40, 60);
                     shelf.setStroke(BLACK);
                     shelf.setStrokeWidth(3);
                     shelf.setFill(PERU);
-                    root.getChildren().add(shelf);
+                    mainPane.getChildren().add(shelf);
 
                     shelf.setOnMouseClicked(new EventHandler<MouseEvent>() {
                         @Override
@@ -99,7 +105,7 @@ public class Controller {
         for(Trolley trolley : warehouseData.getTrolleys()){
             Circle circle = new Circle(trolley.getCoordinates().getX(), trolley.getCoordinates().getY(), 6);
             circle.setFill(RED);
-            root.getChildren().add(circle);
+            mainPane.getChildren().add(circle);
 
             circle.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
@@ -159,9 +165,29 @@ public class Controller {
         for(String name: allGoodsList) {
             newOrderController.loadOrderList(name);
         }
-        //newOrderController.loadOrderList(allGoodsList);
+
+        newOrderController.setWarehouseData(warehouseData);
 
         stage.show();
+    }
+
+    @FXML
+    public void zoom(ScrollEvent event) {
+        double scroll = event.getDeltaY();
+        double zoomScale;
+        if (scroll > 0){
+            zoomScale = 1.1;
+            if (mainPane.getScaleX() > 2.5){
+               return;
+            }
+        } else {
+            zoomScale = 0.9;
+            if (mainPane.getScaleX() < 1){
+                return;
+            }
+        }
+        mainPane.setScaleX(zoomScale * mainPane.getScaleX());
+        mainPane.setScaleY(zoomScale * mainPane.getScaleY());
     }
 
 }

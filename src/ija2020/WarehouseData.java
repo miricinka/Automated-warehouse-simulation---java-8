@@ -103,4 +103,8 @@ public class WarehouseData {
     public ArrayList<String> getGoodsList() {
         return goodsList;
     }
+
+    public void addOrder(Order order) {
+        orders.add(order);
+    }
 }

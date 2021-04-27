@@ -7,9 +7,9 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ija2020.Controller">
    <right>
-      <VBox prefHeight="400.0" prefWidth="170.0" BorderPane.alignment="CENTER">
+      <VBox fx:id="vBox" prefHeight="400.0" prefWidth="170.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox alignment="CENTER" minWidth="-Infinity" prefHeight="29.0" prefWidth="250.0">
+            <HBox id="hBox" alignment="CENTER" minWidth="-Infinity" prefHeight="29.0" prefWidth="250.0">
                <children>
                   <Button fx:id="btn1" mnemonicParsing="false" onMouseClicked="#btn1Clicked" text="Zobrazit objednávky">
                      <HBox.margin>
@@ -52,4 +52,15 @@
    <center>
       <Group fx:id="group" BorderPane.alignment="CENTER" />
    </center>
+   <left>
+      <ScrollPane hbarPolicy="ALWAYS" hvalue="0.5" maxHeight="500.0" maxWidth="550.0" pannable="true" prefHeight="500.0" prefWidth="550.0" vbarPolicy="ALWAYS" BorderPane.alignment="CENTER">
+         <content>
+            <Group>
+               <children>
+                  <Pane fx:id="mainPane" onScroll="#zoom" prefHeight="489.0" prefWidth="541.0" />
+               </children>
+            </Group>
+         </content>
+      </ScrollPane>
+   </left>
 </BorderPane>

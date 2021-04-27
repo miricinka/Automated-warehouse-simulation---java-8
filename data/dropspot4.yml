@@ -1,0 +1,37 @@
+dropSpot:
+  coordinates:
+    x: 15.0
+    y: 15.0
+trolleys:
+  - &Trolley0
+    capacity: 100.0
+    usedCapacity: 0.0
+    order: null
+    carriedItemsList: null
+    coordinates:
+      x: 70.00
+      y: 90.00
+orders:
+  - &Order1
+    id: Jana Novakova
+    toDoList:
+      Jablko: 5
+      Morče: 6
+      Ananas: 8
+  - &Order2
+    id: Maruš Young
+    toDoList:
+      Voňavka: 8
+      Podsedák: 9
+      Bambus: 2
+  - &Order3
+    id: Martin Buchta
+    toDoList:
+      Stůl: 1
+      Talíř: 3 
+  - &Order4
+    id: Alice Vlasatá
+    toDoList:
+      Pomeranč: 3
+      Miska: 1
+isles:

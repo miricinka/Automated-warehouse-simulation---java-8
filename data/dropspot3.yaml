@@ -1,0 +1,184 @@
+dropSpot:
+  coordinates:
+    x: 15.0
+    y: 15.0
+trolleys:
+  - &Trolley0
+    capacity: 100.0
+    usedCapacity: 0.0
+    order: null
+    carriedItemsList: null
+    coordinates:
+      x: 70.00
+      y: 90.00
+isles:
+  - &Isle0
+    start:
+      x: 70.0
+      y: 60.0
+    end:
+      x: 70.0
+      y: 250.0
+    closed: false
+    storeGoodsList:
+      - &storeGoods0
+        name: Jablko
+        itemWeight: 1.0
+        itemsCount: 8
+        coordinates:
+          x: 20.0
+          y: 60.0
+        stopCoordinates:
+          x: 70.0
+          y: 90.0
+      - &storeGoods1
+        name: Stůl
+        itemWeight: 30.0
+        itemsCount: 10
+        coordinates:
+          x: 20.0
+          y: 120.0
+        stopCoordinates:
+          x: 70.0
+          y: 150.0
+      - &storeGoods2
+        name: Hruška
+        itemWeight: 2.0
+        itemsCount: 15
+        coordinates:
+          x: 20.0
+          y: 180.0
+        stopCoordinates:
+          x: 70.0
+          y: 210.0
+      - &storeGoods3
+        name: Nálepky
+        itemWeight: 0.5
+        itemsCount: 30
+        coordinates:
+          x: 80.0
+          y: 60.0
+        stopCoordinates:
+          x: 70.0
+          y: 90.0
+      - &storeGoods4
+        name: Podsedák
+        itemWeight: 2.0
+        itemsCount: 80
+        coordinates:
+          x: 80.0
+          y: 120.0
+        stopCoordinates:
+          x: 70.0
+          y: 150.0
+      - &storeGoods5
+        name: Talíř
+        itemWeight: 1.0
+        itemsCount: 39
+        coordinates:
+          x: 80.0
+          y: 180.0
+        stopCoordinates:
+          x: 70.0
+          y: 210.0
+  - &Isle1
+    start:
+      x: 70.0
+      y: 250.0
+    end:
+      x: 70.0
+      y: 440.0
+    closed: false
+    storeGoodsList:
+      - &storeGoods0
+        name: Pomeranč
+        itemWeight: 2.0
+        itemsCount: 23
+        coordinates:
+          x: 20.0
+          y: 260.0
+        stopCoordinates:
+          x: 70.0
+          y: 290.0
+      - &storeGoods1
+        name: Ananas
+        itemWeight: 3.0
+        itemsCount: 29
+        coordinates:
+          x: 20.0
+          y: 320.0
+        stopCoordinates:
+          x: 70.0
+          y: 350.0
+      - &storeGoods2
+        name: Bambus
+        itemWeight: 4.0
+        itemsCount: 40
+        coordinates:
+          x: 20.0
+          y: 380.0
+        stopCoordinates:
+          x: 70.0
+          y: 380.0
+      - &storeGoods3
+        name: Miska
+        itemWeight: 1.5
+        itemsCount: 200
+        coordinates:
+          x: 80.0
+          y: 260.0
+        stopCoordinates:
+          x: 70.0
+          y: 290.0
+      - &storeGoods4
+        name: Voňavka
+        itemWeight: 0.5
+        itemsCount: 300
+        coordinates:
+          x: 80.0
+          y: 320.0
+        stopCoordinates:
+          x: 70.0
+          y: 350.0
+      - &storeGoods5
+        name: Morče
+        itemWeight: 3.0
+        itemsCount: 40
+        coordinates:
+          x: 80.0
+          y: 380.0
+        stopCoordinates:
+          x: 70.0
+          y: 410.0
+  - &Isle2
+    start:
+      x: 20.0
+      y: 250.0
+    end:
+      x: 480.0
+      y: 250.0
+    closed: false
+    storeGoodsList: null
+orders:
+  - &Order1
+    id: Jana Novakova
+    toDoList:
+      Jablko: 5
+      Morče: 6
+      Ananas: 8
+  - &Order2
+    id: Maruš Young
+    toDoList:
+      Voňavka: 8
+      Podsedák: 9
+      Bambus: 2
+  - &Order3
+    id: Martin Buchta
+    toDoList:
+      Stůl: 1
+      Talíř: 3 
+  - &Order4
+    id: Alice Vlasatá
+    toDoList:
+      Pomeranč: 3
+      Miska: 1

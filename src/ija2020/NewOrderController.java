@@ -13,13 +13,12 @@ public class NewOrderController {
 
     @FXML
     public Button saveButton;
-
     @FXML
     private ListView orderList;
-
     @FXML
     private TextField newOrderID;
 
+    private WarehouseData warehouseData;
 
     public void loadOrderList(String name){
         Label label1 = new Label(name);
@@ -29,6 +28,10 @@ public class NewOrderController {
         hb.getChildren().addAll(label1, textField);
         hb.setSpacing(10);
         orderList.getItems().add(hb);
+    }
+
+    public void setWarehouseData(WarehouseData warehouseData) {
+        this.warehouseData = warehouseData;
     }
 
     public void saveButtonClicked() {
@@ -62,6 +65,8 @@ public class NewOrderController {
             Order newOrder = new Order();
             newOrder.setId(newOrderID.getText());
             newOrder.setToDoList(toDoList);
+            //add order to data
+            warehouseData.addOrder(newOrder);
         }
 
         //close window
