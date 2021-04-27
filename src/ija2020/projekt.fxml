@@ -16,7 +16,7 @@
                         <Insets top="20.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="btn2" alignment="CENTER" mnemonicParsing="false" text="Nová objednávka">
+                  <Button fx:id="btn2" alignment="CENTER" mnemonicParsing="false" onAction="#btn2Clicked" text="Nová objednávka">
                      <HBox.margin>
                         <Insets top="20.0" />
                      </HBox.margin>
@@ -31,14 +31,17 @@
             <Slider />
             <Label text="Čas simulace">
                <VBox.margin>
-                  <Insets left="20.0" right="20.0" top="20.0" />
+                  <Insets left="20.0" right="20.0" top="10.0" />
                </VBox.margin>
             </Label>
-            <Slider />
+            <Slider>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin></Slider>
             <ScrollPane prefHeight="361.0" prefWidth="250.0">
-              <content>
-                <AnchorPane fx:id="textPanel" minHeight="0.0" minWidth="0.0" prefHeight="358.0" prefWidth="246.0" />
-              </content>
+               <content>
+                  <AnchorPane fx:id="textPanel" prefHeight="356.0" prefWidth="247.0" />
+               </content>
             </ScrollPane>
          </children>
          <BorderPane.margin>

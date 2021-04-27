@@ -12,7 +12,7 @@ import java.util.LinkedList;
 public class StoreGoods {
     private String name;
     private double itemWeight;
-    private LinkedList<Item> itemsList;
+    private int itemsCount;
     private Coordinates coordinates;
     private Coordinates stopCoordinates;
     private Isle isle;
@@ -20,7 +20,6 @@ public class StoreGoods {
     public StoreGoods() {}
 
     public StoreGoods(String name, Coordinates cords, Isle isle, Coordinates stopCoordinates, Double itemWeight) {
-        itemsList = new LinkedList<>();
         this.name = name;
         this.itemWeight = itemWeight;
         this.coordinates = cords;
@@ -78,21 +77,6 @@ public class StoreGoods {
         this.coordinates = coordinates;
     }
 
-    /**
-     * Adds new item to the list of items
-     * @param newItem one new item
-     */
-    public void addNewItem(Item newItem) {
-        itemsList.add(newItem);
-    }
-
-    /**
-     * Returns last item in list of items
-     * @return item
-     */
-    public Item removeItem() {
-        return itemsList.pollLast();
-    }
 
     /**
      * Returns Isle this shelf belongs to
@@ -126,19 +110,11 @@ public class StoreGoods {
         this.stopCoordinates = stopCoordinates;
     }
 
-    /**
-     * Gets all items in shelf
-     * @return list of items in this shelf
-     */
-    public LinkedList<Item> getItemsList() {
-        return itemsList;
+    public int getItemsCount() {
+        return itemsCount;
     }
 
-    /**
-     * Sets list of items in this shelf
-     * @return coordinates where the trolley stops
-     */
-    public void setItemsList(LinkedList<Item> itemsList) {
-        this.itemsList = itemsList;
+    public void setItemsCount(int itemsCount) {
+        this.itemsCount = itemsCount;
     }
 }

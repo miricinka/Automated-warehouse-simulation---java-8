@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="500.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ija2020.NewOrderController">
+   <children>
+      <ListView fx:id="orderList" layoutY="80.0" prefHeight="362.0" prefWidth="400.0" />
+      <Button fx:id="saveButton" layoutX="173.0" layoutY="449.0" mnemonicParsing="false" onAction="#saveButtonClicked" text="Uložit" />
+      <TextField fx:id="newOrderID" layoutX="102.0" layoutY="38.0" prefHeight="27.0" prefWidth="286.0" />
+      <Label layoutX="27.0" layoutY="34.0" prefHeight="35.0" prefWidth="92.0" text="Jméno" />
+   </children>
+</AnchorPane>

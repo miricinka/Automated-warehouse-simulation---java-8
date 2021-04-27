@@ -6,12 +6,9 @@ import java.io.File;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import javafx.scene.text.Text;
-import javafx.scene.layout.AnchorPane;
 
 /**
  * Main of application
@@ -23,14 +20,11 @@ import javafx.scene.layout.AnchorPane;
 
 public class Main extends Application {
 
-    @FXML
-    private AnchorPane textPanel;
-
     @Override
     public void start(Stage primaryStage) throws Exception{
         YAMLFactory yaml_factory = new YAMLFactory();
         ObjectMapper obj_mapper = new ObjectMapper(yaml_factory);
-        WarehouseData warehouseData = obj_mapper.readValue(new File("data/dropspot2.yml"), WarehouseData.class);
+        WarehouseData warehouseData = obj_mapper.readValue(new File("data/dropspot.yml"), WarehouseData.class);
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("projekt.fxml"));
         BorderPane root = loader.load();
@@ -43,8 +37,8 @@ public class Main extends Application {
         controller.paintIsles(root);
         controller.paintTrolleys(root);
 
-        Text CanBeSeen = new Text(20, 20, "Načtení skladu ze souboru YAML a zobrazení v GUI\nPo najetí myší na vozík a regál se zobrazí informace o obsahu");
-        root.getChildren().add(CanBeSeen);
+        controller.setAllGoodsList();
+
 
         primaryStage.show();
     }

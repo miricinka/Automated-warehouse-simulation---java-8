@@ -2,32 +2,56 @@ package ija2020;
 
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 import javafx.scene.shape.*;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import static javafx.scene.paint.Color.*;
 
+/**
+ * Main controller of application
+ * @version 1.0
+ * @author <a href="xkolar76@stud.fit.vutbr.cz">Mirka Kolarikova</a>
+ * @author <a href="xzovin00@stud.fit.vutbr.cz">Martin Zovinec</a>
+ */
 public class Controller {
     @FXML
     private AnchorPane textPanel;
-    @FXML
-    private Button btn1;
-
     private WarehouseData warehouseData;
+    private Rectangle lastClickedShelf;
+    private Circle lastClickedTrolley;
+    private ArrayList<String> allGoodsList;
 
     public void setWarehouseData(WarehouseData warehouseData) {
         this.warehouseData = warehouseData;
     }
 
+    public void setAllGoodsList(){
+        allGoodsList = new ArrayList<>();
+        warehouseData.setGoodsList();
+        allGoodsList = warehouseData.getGoodsList();
+        System.out.println(allGoodsList);
+    }
+
+    /**
+     * Paints all Isles and Goods from warehouseData
+     * Shows info on mouse entered and exited
+     * @param root of borderpane
+     */
     public void paintIsles(BorderPane root) {
-        Text StoreGoodsInfo = new Text(560, 160, "");
-        //Label StoreGoodsInfo = new Label("Ahoj");
-        root.getChildren().add(StoreGoodsInfo);
-        //textPanel.getChildren().add(StoreGoodsInfo);
+
+        Text storeGoodsInfo = new Text(10, 20, "");
 
         for(Isle isle : warehouseData.getIsles()){
             Line line = new Line(isle.getStart().getX(), isle.getStart().getY(), isle.getEnd().getX(), isle.getEnd().getY());
@@ -39,21 +63,23 @@ public class Controller {
                     Rectangle shelf = new Rectangle(storeGoods.getCoordinates().getX(), storeGoods.getCoordinates().getY(), 40, 60);
                     shelf.setStroke(BLACK);
                     shelf.setStrokeWidth(3);
-                    shelf.setFill(BROWN);
+                    shelf.setFill(PERU);
                     root.getChildren().add(shelf);
-                    shelf.setOnMouseEntered(new EventHandler<MouseEvent>() {
-                        @Override
-                        public void handle(MouseEvent event) {
-                            shelf.setFill(LIME);
-                            StoreGoodsInfo.setText("Obsah: " + storeGoods.getName() + "\nPocet: " + storeGoods.getItemsList().size() + "x\nHmotnost: " + storeGoods.getItemWeight() + "kg");
-                        }
-                    });
 
-                    shelf.setOnMouseExited(new EventHandler<MouseEvent>() {
+                    shelf.setOnMouseClicked(new EventHandler<MouseEvent>() {
                         @Override
                         public void handle(MouseEvent event) {
-                            shelf.setFill(BROWN);
-                            StoreGoodsInfo.setText("");
+                            if (lastClickedShelf != null) {
+                                lastClickedShelf.setFill(PERU);
+                            }
+                            if (lastClickedTrolley != null) {
+                                lastClickedTrolley.setFill(RED);
+                            }
+                            lastClickedShelf = shelf;
+                            shelf.setFill(LIME);
+                            textPanel.getChildren().clear();
+                            textPanel.getChildren().add(storeGoodsInfo);
+                            storeGoodsInfo.setText("Obsah: " + storeGoods.getName() + "\nPocet: " + storeGoods.getItemsCount() + "x\nHmotnost: " + storeGoods.getItemWeight() + "kg");
                         }
                     });
                 }
@@ -61,50 +87,81 @@ public class Controller {
         }
     }
 
+    /**
+     * Paints all Trolleys from warehouseData
+     * Shows info on mouse entered and exited
+     * @param root of borderpane
+     */
     public void paintTrolleys(BorderPane root) {
 
-        Text TrolleyInfo = new Text(560, 160, "");
-        root.getChildren().add(TrolleyInfo);
+        Text trolleyInfo = new Text(10, 20, "");
 
         for(Trolley trolley : warehouseData.getTrolleys()){
             Circle circle = new Circle(trolley.getCoordinates().getX(), trolley.getCoordinates().getY(), 6);
             circle.setFill(RED);
             root.getChildren().add(circle);
-            circle.setOnMouseEntered(new EventHandler<MouseEvent>() {
+
+            circle.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
+                    if (lastClickedShelf != null) {
+                        lastClickedShelf.setFill(PERU);
+                    }
+                    if (lastClickedTrolley != null) {
+                        lastClickedTrolley.setFill(RED);
+                    }
+                    lastClickedTrolley = circle;
                     circle.setFill(LIME);
-                    TrolleyInfo.setText("Maximální kapacita: " + trolley.getCapacity() + "kg\nVyužitá kapacita: " + trolley.getUsedCapacity() + "kg");
+                    textPanel.getChildren().clear();
+                    textPanel.getChildren().add(trolleyInfo);
+                    trolleyInfo.setText("Maximální kapacita: " + trolley.getCapacity() + "kg\nVyužitá kapacita: " + trolley.getUsedCapacity() + "kg");
                 }
             });
 
-            circle.setOnMouseExited(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent event) {
-                    circle.setFill(RED);
-                    TrolleyInfo.setText("");
-                }
-            });
         }
     }
 
+    /**
+     * On button clicked shows all orders in system
+     * for now to terminal
+     */
     @FXML
     public void btn1Clicked() {
         textPanel.getChildren().clear();
-        System.out.print(textPanel.getChildren().isEmpty());
-        Text info = new Text(560, 160, "AAAAAANJDEDJOCKEJNDJKOXDKSJNJXKO");
+        Text info = new Text(10, 20, "");
         textPanel.getChildren().add(info);
 
         String textToView = "";
         for (Order order: warehouseData.getOrders()) {
             textToView = textToView.concat(order.getId() + ":\n");
-            for(Item item: order.getToDoList()) {
-                textToView = textToView.concat("  "+ item.getStore().getName() + "\n");
+            for (HashMap.Entry<String,Integer> entry : order.getToDoList().entrySet()){
+                textToView = textToView.concat("    "+ entry.getKey() +" "+entry.getValue() + "x\n");
             }
         }
         info.setText(textToView);
-        System.out.print("text" + textToView);
-        System.out.print(textPanel.getChildren());
+    }
+
+    @FXML
+    public void btn2Clicked() {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("newOrder.fxml"));
+        Parent root1 = null;
+        try {
+            root1 = (Parent) fxmlLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        NewOrderController newOrderController = fxmlLoader.getController();
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setTitle("Nová objednávka");
+        stage.setScene(new Scene(root1));
+
+        for(String name: allGoodsList) {
+            newOrderController.loadOrderList(name);
+        }
+        //newOrderController.loadOrderList(allGoodsList);
+
+        stage.show();
     }
 
 }
