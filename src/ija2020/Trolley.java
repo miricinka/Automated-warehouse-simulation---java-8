@@ -1,6 +1,9 @@
 package ija2020;
 
+import javafx.scene.shape.Circle;
+
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Class representing one trolley
@@ -14,6 +17,8 @@ public class Trolley {
     private Order order;
     private LinkedList<StoreGoods> carriedItemsList;
     private Coordinates coordinates;
+    private List<Coordinates> path;
+    private Circle circle;
 
     public Trolley() {}
 
@@ -103,5 +108,41 @@ public class Trolley {
      */
     public void setCoordinates(Coordinates coordinates) {
         this.coordinates = coordinates;
+    }
+
+    public void setPath(List<Coordinates> path){
+        this.path = path;
+    }
+
+    public void addCircle(Circle circle){
+        this.circle = circle;
+    }
+
+    public void updateCoords() {
+        if(path == null || path.isEmpty()) {
+            return;
+        }
+        Coordinates wayToGo = path.get(0);
+        if(wayToGo.getX() == coordinates.getX() && wayToGo.getY()==coordinates.getY()) {
+            path.remove(0);
+            return;
+        } else if(wayToGo.getX() == coordinates.getX()) {
+            if(wayToGo.getY() > coordinates.getY()) {
+                coordinates.setY(coordinates.getY() + 1.0);
+            }else {
+                coordinates.setY(coordinates.getY() - 1.0);
+            }
+        }else {
+            if(wayToGo.getX() > coordinates.getX()){
+                coordinates.setX(coordinates.getX() + 1.0);
+            }else{
+                coordinates.setX(coordinates.getX() - 1.0);
+            }
+        }
+        //System.out.println(coordinates.getX());
+        //System.out.println(coordinates.getY());
+        //update on gui GUI
+        circle.setCenterX(coordinates.getX());
+        circle.setCenterY(coordinates.getY());
     }
 }

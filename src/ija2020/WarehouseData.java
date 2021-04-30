@@ -57,6 +57,10 @@ public class WarehouseData {
         this.trolleys = trolleys;
     }
 
+    public void addTrolley(Trolley trolley){
+        trolleys.add(trolley);
+    }
+
     /**
      * Returns list of isles in system
      * @return list of isles in system

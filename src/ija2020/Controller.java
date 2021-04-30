@@ -1,10 +1,12 @@
 package ija2020;
 
+import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Slider;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.AnchorPane;
@@ -18,6 +20,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import static javafx.scene.paint.Color.*;
 
@@ -32,11 +36,15 @@ public class Controller {
     private AnchorPane textPanel;
     @FXML
     private Pane mainPane;
+    @FXML
+    private Slider speedSlider;
 
     private WarehouseData warehouseData;
     private Rectangle lastClickedShelf;
     private Circle lastClickedTrolley;
     private ArrayList<String> allGoodsList;
+    private Timer timer;
+    private long simulationSpeed;
 
     public void setWarehouseData(WarehouseData warehouseData) {
         this.warehouseData = warehouseData;
@@ -106,6 +114,7 @@ public class Controller {
             Circle circle = new Circle(trolley.getCoordinates().getX(), trolley.getCoordinates().getY(), 6);
             circle.setFill(RED);
             mainPane.getChildren().add(circle);
+            trolley.addCircle(circle);
 
             circle.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
@@ -188,6 +197,29 @@ public class Controller {
         }
         mainPane.setScaleX(zoomScale * mainPane.getScaleX());
         mainPane.setScaleY(zoomScale * mainPane.getScaleY());
+    }
+
+    public void setupSpeed(){
+        simulationSpeed = 1;
+    }
+
+    public void changeSpeed(){
+        System.out.println(speedSlider.getValue());
+        simulationSpeed = (long) speedSlider.getValue();
+        timer.cancel();
+        simulationTime();
+    }
+
+    public void simulationTime() {
+        timer = new Timer(false);
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                for(Trolley trolley: warehouseData.getTrolleys()) {
+                    Platform.runLater(()->trolley.updateCoords());
+                }
+            }
+        }, 0, 300/simulationSpeed);
     }
 
 }

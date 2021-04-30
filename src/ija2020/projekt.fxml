@@ -5,7 +5,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ija2020.Controller">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="814.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ija2020.Controller">
    <right>
       <VBox fx:id="vBox" prefHeight="400.0" prefWidth="170.0" BorderPane.alignment="CENTER">
          <children>
@@ -28,7 +28,7 @@
                   <Insets left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
             </Label>
-            <Slider />
+            <Slider fx:id="speedSlider" blockIncrement="1.0" majorTickUnit="1.0" max="10.0" min="1.0" minorTickCount="0" onMouseReleased="#changeSpeed" showTickLabels="true" showTickMarks="true" />
             <Label text="Čas simulace">
                <VBox.margin>
                   <Insets left="20.0" right="20.0" top="10.0" />
@@ -53,11 +53,11 @@
       <Group fx:id="group" BorderPane.alignment="CENTER" />
    </center>
    <left>
-      <ScrollPane hbarPolicy="ALWAYS" hvalue="0.5" maxHeight="500.0" maxWidth="550.0" pannable="true" prefHeight="500.0" prefWidth="550.0" vbarPolicy="ALWAYS" BorderPane.alignment="CENTER">
+      <ScrollPane hbarPolicy="ALWAYS" hvalue="0.5" maxHeight="500.0" maxWidth="564.0" pannable="true" prefHeight="500.0" prefWidth="564.0" vbarPolicy="ALWAYS" BorderPane.alignment="CENTER">
          <content>
             <Group>
                <children>
-                  <Pane fx:id="mainPane" onScroll="#zoom" prefHeight="489.0" prefWidth="541.0" />
+                  <Pane fx:id="mainPane" onScroll="#zoom" prefHeight="500.0" prefWidth="550.0" />
                </children>
             </Group>
          </content>

@@ -3,6 +3,9 @@ package ija2020;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -35,12 +38,23 @@ public class Main extends Application {
 
         controller.setWarehouseData(warehouseData);
         controller.paintIsles(root);
+
+        Trolley vozikTest = new Trolley(20,new Coordinates(70, 60));
+        List<Coordinates> listCoords = new ArrayList<>();
+        listCoords.add(new Coordinates(70, 250));
+        listCoords.add(new Coordinates(200, 250));
+        listCoords.add(new Coordinates(70, 250));
+        listCoords.add(new Coordinates(70, 60));
+        vozikTest.setPath(listCoords);
+        warehouseData.addTrolley(vozikTest);
+
         controller.paintTrolleys(root);
-
         controller.setAllGoodsList();
+        controller.setupSpeed();
 
-
+        controller.simulationTime();
         primaryStage.show();
+
     }
 
     public static void main(String[] args) {
