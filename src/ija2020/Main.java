@@ -27,7 +27,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         YAMLFactory yaml_factory = new YAMLFactory();
         ObjectMapper obj_mapper = new ObjectMapper(yaml_factory);
-        WarehouseData warehouseData = obj_mapper.readValue(new File("data/dropspot.yml"), WarehouseData.class);
+        WarehouseData warehouseData = obj_mapper.readValue(new File("data/dropspot4.yml"), WarehouseData.class);
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("projekt.fxml"));
         BorderPane root = loader.load();

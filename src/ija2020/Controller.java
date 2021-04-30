@@ -74,9 +74,9 @@ public class Controller {
             mainPane.getChildren().add(line);
             if (isle.getStoreGoodsList() != null) {
                 for (StoreGoods storeGoods : isle.getStoreGoodsList()) {
-                    Rectangle shelf = new Rectangle(storeGoods.getCoordinates().getX(), storeGoods.getCoordinates().getY(), 40, 60);
+                    Rectangle shelf = new Rectangle(storeGoods.getCoordinates().getX(), storeGoods.getCoordinates().getY(), 20, 40);
                     shelf.setStroke(BLACK);
-                    shelf.setStrokeWidth(3);
+                    shelf.setStrokeWidth(2);
                     shelf.setFill(PERU);
                     mainPane.getChildren().add(shelf);
 
