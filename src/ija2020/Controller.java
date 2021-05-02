@@ -100,7 +100,7 @@ public class Controller {
                             shelf.setFill(LIME);
                             textPanel.getChildren().clear();
                             textPanel.getChildren().add(storeGoodsInfo);
-                            storeGoodsInfo.setText("Obsah: " + storeGoods.getName() + "x\nHmotnost: " + storeGoods.getItemWeight() + "kg" +"\nZbývá: " + storeGoods.getItemsCount() + "\nK vyzvednutí: " + storeGoods.getReadyToDispatch());
+                            storeGoodsInfo.setText("Obsah: " + storeGoods.getName() + "\nHmotnost: " + storeGoods.getItemWeight() + "kg" +"\nZbývá: " + storeGoods.getItemsCount() + "\nK vyzvednutí: " + storeGoods.getReadyToDispatch());
                         }
                     });
                 }
@@ -286,20 +286,14 @@ public class Controller {
         listCoords.add(new Coordinates(520, 250));
         listCoords.add(new Coordinates(470, 250));
 
-        //listCoords.add(new Coordinates(520, 250));
-
         Coordinates startCoordinates = new Coordinates(520, 250);
         HashMap<String, Integer> allGoods = new HashMap<>(order.getToDoList());
-        //System.out.println(allGoods);
         while(!allGoods.isEmpty()){
             StoreGoods closest = warehouseData.findNextClosestGoods(startCoordinates, allGoods);
-            //System.out.println(closest.getName());
             //je tu vse co chceme -> smazat ze seznamu
             if(closest.getItemsCount() >= allGoods.get(closest.getName())){
                 //odecist co jsme vzali
-                 //System.out.println(closest.getItemsCount());
                 closest.setItemsCount(closest.getItemsCount() - allGoods.get(closest.getName()));
-                //System.out.println(closest.getItemsCount());
                 closest.setReadyToDispatch(closest.getReadyToDispatch() + allGoods.get(closest.getName()));
                 allGoods.remove(closest.getName());
             }else{ //neni vse co chceme -> vezmeme co muzem
@@ -312,13 +306,6 @@ public class Controller {
             //hledat odkud jsem ted
             Coordinates nextCoordinates = closest.getStopCoordinates();
             while (startCoordinates.getX() != nextCoordinates.getX()){
-                //if(startCoordinates.getY() > 250 && nextCoordinates.getY() > 250){
-                 //   if(startCoordinates.getY() + nextCoordinates.getY() / 2 < 360){
-
-                 //   }
-                //}else if (startCoordinates.getY() < 250 && nextCoordinates.getY() < 250){
-
-                //}else {
                     if(startCoordinates.getY() != 250){
                         listCoords.add(new Coordinates(startCoordinates.getX(), 250));
                         startCoordinates = new Coordinates(startCoordinates.getX(), 250);
@@ -326,15 +313,10 @@ public class Controller {
                         listCoords.add(new Coordinates(nextCoordinates.getX(), 250));
                         startCoordinates = new Coordinates(nextCoordinates.getX(), 250);
                     }
-                //}
-
 
             }
             listCoords.add(nextCoordinates);
             startCoordinates = nextCoordinates;
-            //listCoords.add(closest.getStopCoordinates());
-
-            //System.out.println(allGoods);
         }
         listCoords.add(new Coordinates(startCoordinates.getX(), 250));
         listCoords.add(new Coordinates(520, 250));

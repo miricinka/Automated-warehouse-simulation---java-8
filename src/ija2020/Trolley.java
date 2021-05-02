@@ -136,16 +136,29 @@ public class Trolley {
         this.circle = circle;
     }
 
+
+    public boolean isGoodsStop(Coordinates coordinates){
+
+        return false;
+    }
+
     public void updateCoords() {
         if(coordinates == null) {
             coordinates = new Coordinates(startCoordinates.getX(), startCoordinates.getY());
         }
-        if(path == null || path.isEmpty()) {
+        if(path == null) {
+            return;
+        }
+        //dojel na konec cesty -> splnil objednavku
+        if(path.isEmpty()){
+            path = null;
+            order = null;
             return;
         }
         Coordinates wayToGo = path.get(0);
         if(wayToGo.getX() == coordinates.getX() && wayToGo.getY()==coordinates.getY()) {
             //zastavit se
+            //update zbozi pokud je na zbozi
             path.remove(0);
             return;
         } else if(wayToGo.getX() == coordinates.getX()) {
