@@ -2,8 +2,8 @@ package ija2020;
 
 import javafx.scene.shape.Circle;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Class representing one trolley
@@ -12,11 +12,13 @@ import java.util.List;
  * @author <a href="xzovin00@stud.fit.vutbr.cz">Martin Zovinec</a>
  */
 public class Trolley {
+    private String id;
     private double capacity; //kg
     private double usedCapacity;
     private Order order;
-    private LinkedList<StoreGoods> carriedItemsList;
     private Coordinates coordinates;
+    private Coordinates startCoordinates;
+    private List<Coordinates> wholePath;
     private List<Coordinates> path;
     private Circle circle;
 
@@ -24,11 +26,19 @@ public class Trolley {
 
     public Trolley(double capacity, Coordinates coordinates) {
         this.capacity = capacity;
-        this.coordinates = coordinates;
+        this.startCoordinates = coordinates;
         usedCapacity = 0.0;
-        carriedItemsList = new LinkedList<>();
         order = null;
     }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setID(String ID) {
+        this.id = ID;
+    }
+
 
     /**
      * Gets max capacity of trolley
@@ -78,20 +88,12 @@ public class Trolley {
         this.order = order;
     }
 
-    /**
-     * Gets list of carried items
-     * @return list of carried items
-     */
-    public LinkedList<StoreGoods> getCarriedItemsList() {
-        return carriedItemsList;
+    public Coordinates getStartCoordinates() {
+        return startCoordinates;
     }
 
-    /**
-     * Sets carried items list
-     * @param carriedItemsList list of carried items
-     */
-    public void setCarriedItemsList(LinkedList<StoreGoods> carriedItemsList) {
-        this.carriedItemsList = carriedItemsList;
+    public void setStartCoordinates(Coordinates startCoordinates) {
+        this.startCoordinates = startCoordinates;
     }
 
     /**
@@ -114,16 +116,36 @@ public class Trolley {
         this.path = path;
     }
 
+    public List<Coordinates> getPath(){
+        return path;
+    }
+
+    public void setWholePath(){
+        wholePath = new ArrayList<>(path);
+    }
+
+    public List<Coordinates> getWholePath(){
+        return wholePath;
+    }
+
+    public Coordinates getWholePathFirst(){
+        return wholePath.get(0);
+    }
+
     public void addCircle(Circle circle){
         this.circle = circle;
     }
 
     public void updateCoords() {
+        if(coordinates == null) {
+            coordinates = new Coordinates(startCoordinates.getX(), startCoordinates.getY());
+        }
         if(path == null || path.isEmpty()) {
             return;
         }
         Coordinates wayToGo = path.get(0);
         if(wayToGo.getX() == coordinates.getX() && wayToGo.getY()==coordinates.getY()) {
+            //zastavit se
             path.remove(0);
             return;
         } else if(wayToGo.getX() == coordinates.getX()) {
@@ -139,10 +161,9 @@ public class Trolley {
                 coordinates.setX(coordinates.getX() - 1.0);
             }
         }
-        //System.out.println(coordinates.getX());
-        //System.out.println(coordinates.getY());
         //update on gui GUI
         circle.setCenterX(coordinates.getX());
         circle.setCenterY(coordinates.getY());
     }
+
 }

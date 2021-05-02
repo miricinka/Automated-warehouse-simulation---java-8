@@ -11,8 +11,6 @@ import java.util.LinkedList;
  */
 public class Order {
     String id;
-    //LinkedList<StoreGoods> toDoList;
-    //LinkedList<StoreGoods> doneList;
     HashMap<String, Integer> toDoMap;
     HashMap<String, Integer> doneMap;
 
@@ -70,5 +68,9 @@ public class Order {
     public void setDoneList(HashMap<String, Integer> doneList) {
         this.doneMap = doneList;
     }
+
+    //public Coordinates findGoods(String goodsName){
+    //    return new Coordinates(0.0,0.0);
+    //}
 
 }

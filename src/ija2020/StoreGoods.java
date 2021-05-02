@@ -13,6 +13,7 @@ public class StoreGoods {
     private String name;
     private double itemWeight;
     private int itemsCount;
+    private int readyToDispatch = 0;
     private Coordinates coordinates;
     private Coordinates stopCoordinates;
     private Isle isle;
@@ -116,5 +117,13 @@ public class StoreGoods {
 
     public void setItemsCount(int itemsCount) {
         this.itemsCount = itemsCount;
+    }
+
+    public int getReadyToDispatch() {
+        return readyToDispatch;
+    }
+
+    public void setReadyToDispatch(int readyToDispatch) {
+        this.readyToDispatch = readyToDispatch;
     }
 }

@@ -1,7 +1,9 @@
 package ija2020;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
 
 /**
  * Class representing Warehouse Data
@@ -24,6 +26,7 @@ public class WarehouseData {
         this.isles = isles;
         this.orders = orders;
     }
+
 
     /**
      * Returns dropspot in system
@@ -85,6 +88,13 @@ public class WarehouseData {
         return orders;
     }
 
+    public Order takeNextOrder(){
+        if (orders.size() != 0){
+            return orders.pollFirst();
+        }
+        return null;
+    }
+
     /**
      * Sets list of orders
      * @param orders list of orders
@@ -113,5 +123,41 @@ public class WarehouseData {
 
     public void addOrder(Order order) {
         orders.add(order);
+    }
+
+    public StoreGoods findGoods(String goodsName){
+        for(Isle isle: isles){
+            if(!isle.getClosed()){ //pokud neni zavrena
+                if(isle.getStoreGoodsList() != null){
+                    for(StoreGoods goods: isle.getStoreGoodsList()){
+                        if(goods.getName().equals(goodsName)){
+                            if(goods.getItemsCount() != 0){
+                                return goods;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+    public StoreGoods findNextClosestGoods(Coordinates coordinates, HashMap<String, Integer> allGoods){
+        double shortestDistance = 1000000000;
+        StoreGoods closest = null;
+
+        for (Map.Entry<String,Integer> entry : allGoods.entrySet()){
+            StoreGoods goods = findGoods(entry.getKey());
+            Double x1 = goods.getStopCoordinates().getX();
+            Double y1 = goods.getStopCoordinates().getY();
+            Double x2 = coordinates.getX();
+            Double y2 = coordinates.getY();
+            double distance=Math.sqrt((x2-x1)*(x2-x1) + (y2-y1)*(y2-y1));
+            if(distance < shortestDistance) {
+                shortestDistance = distance;
+                closest = goods;
+            }
+        }
+        return closest;
     }
 }

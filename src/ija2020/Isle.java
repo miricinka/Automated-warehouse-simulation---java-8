@@ -3,6 +3,8 @@ package ija2020;
 import java.util.LinkedList;
 import java.util.Objects;
 
+import static java.lang.Math.abs;
+
 /**
  * Class Isle represents one isle in warehouse with list of storeGoods
  * isle can be closed
@@ -13,8 +15,9 @@ import java.util.Objects;
 public class Isle {
     private Coordinates start;
     private Coordinates end;
-    private Boolean closed;
+    private Boolean closed = false;
     private LinkedList<StoreGoods> storeGoodsList;
+    private double cost;
 
     public Isle() {}
 
@@ -87,6 +90,22 @@ public class Isle {
      */
     public void setStoreGoodsList(LinkedList<StoreGoods> storeGoodsList) {
         this.storeGoodsList = storeGoodsList;
+    }
+
+    public double getCost() {
+        return cost;
+    }
+
+    public void setCost() {
+        this.cost = calculateIsleCost();
+    }
+
+    public double calculateIsleCost(){
+        if(start.getX() == end.getX()){
+            return abs(start.getY() - end.getY());
+        }else{
+            return abs(start.getX()-end.getY());
+        }
     }
 
 

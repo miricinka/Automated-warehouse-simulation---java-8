@@ -1,21 +1,21 @@
 dropSpot:
   coordinates:
-    x: 15.0
-    y: 15.0
+    x: 520.0
+    y: 250.0
 trolleys:
-  - &Trolley0
+  - &Trolley02
+    id: 02
     capacity: 100.0
     usedCapacity: 0.0
     order: null
-    carriedItemsList: null
-    coordinates:
-      x: 70.00
-      y: 90.00
+    startCoordinates:
+      x: 520.00
+      y: 250.00
 isles:
   - &Isle1
     start:
       x: 50.0
-      y: 40.0
+      y: 20.0
     end:
       x: 50.0
       y: 250.0
@@ -23,7 +23,7 @@ isles:
       - &storeGoods1
         name: Jablko
         itemWeight: 1.0
-        itemsCount: 8
+        itemsCount: 20
         coordinates:
           x: 20.0
           y: 40.0
@@ -31,9 +31,9 @@ isles:
           x: 50.0
           y: 60.0
       - &storeGoods2
-        name: Jablko
+        name: Jahoda
         itemWeight: 1.0
-        itemsCount: 10
+        itemsCount: 15
         coordinates:
           x: 20.0
           y: 80.0
@@ -41,9 +41,9 @@ isles:
           x: 50.0
           y: 100.0
       - &storeGoods3
-        name: Jablko
-        itemWeight: 1.0
-        itemsCount: 10
+        name: Hruška
+        itemWeight: 1.5
+        itemsCount: 6
         coordinates:
           x: 20.0
           y: 120.0
@@ -51,9 +51,9 @@ isles:
           x: 50.0
           y: 140.0
       - &storeGoods4
-        name: Jablko
-        itemWeight: 1.0
-        itemsCount: 10
+        name: Meloun
+        itemWeight: 10.0
+        itemsCount: 3
         coordinates:
           x: 20.0
           y: 160.0
@@ -61,9 +61,9 @@ isles:
           x: 50.0
           y: 180.0
       - &storeGoods5
-        name: Jablko
-        itemWeight: 1.0
-        itemsCount: 10
+        name: Rajče
+        itemWeight: 2.0
+        itemsCount: 80
         coordinates:
           x: 20.0
           y: 200.0
@@ -71,9 +71,9 @@ isles:
           x: 50.0
           y: 220.0
       - &storeGoods6
-        name: Jablko
+        name: Pomeranč
         itemWeight: 1.0
-        itemsCount: 8
+        itemsCount: 30
         coordinates:
           x: 60.0
           y: 40.0
@@ -81,9 +81,9 @@ isles:
           x: 50.0
           y: 60.0
       - &storeGoods7
-        name: Jablko
-        itemWeight: 1.0
-        itemsCount: 10
+        name: Avokádo
+        itemWeight: 3.0
+        itemsCount: 40
         coordinates:
           x: 60.0
           y: 80.0
@@ -91,9 +91,9 @@ isles:
           x: 50.0
           y: 100.0
       - &storeGoods8
-        name: Jablko
-        itemWeight: 1.0
-        itemsCount: 10
+        name: Brambora
+        itemWeight: 4.0
+        itemsCount: 100
         coordinates:
           x: 60.0
           y: 120.0
@@ -101,9 +101,9 @@ isles:
           x: 50.0
           y: 140.0
       - &storeGoods9
-        name: Jablko
-        itemWeight: 1.0
-        itemsCount: 10
+        name: Celer
+        itemWeight: 4.0
+        itemsCount: 70
         coordinates:
           x: 60.0
           y: 160.0
@@ -111,9 +111,9 @@ isles:
           x: 50.0
           y: 180.0
       - &storeGoods10
-        name: Jablko
-        itemWeight: 1.0
-        itemsCount: 10
+        name: Řeřicha
+        itemWeight: 6.0
+        itemsCount: 20
         coordinates:
           x: 60.0
           y: 200.0
@@ -123,14 +123,14 @@ isles:
   - &Isle2
     start:
       x: 110.0
-      y: 40.0
+      y: 20.0
     end:
       x: 110.0
       y: 250.0
     storeGoodsList:
       - &storeGoods1
-        name: Jablko
-        itemWeight: 1.0
+        name: Roleta
+        itemWeight: 15.0
         itemsCount: 8
         coordinates:
           x: 80.0
@@ -139,9 +139,9 @@ isles:
           x: 110.0
           y: 60.0
       - &storeGoods2
-        name: Jablko
-        itemWeight: 1.0
-        itemsCount: 10
+        name: Stůl
+        itemWeight: 20.0
+        itemsCount: 20
         coordinates:
           x: 80.0
           y: 80.0
@@ -149,9 +149,9 @@ isles:
           x: 110.0
           y: 100.0
       - &storeGoods3
-        name: Jablko
-        itemWeight: 1.0
-        itemsCount: 10
+        name: Židle
+        itemWeight: 5.0
+        itemsCount: 30
         coordinates:
           x: 80.0
           y: 120.0
@@ -159,9 +159,9 @@ isles:
           x: 110.0
           y: 140.0
       - &storeGoods4
-        name: Jablko
-        itemWeight: 1.0
-        itemsCount: 10
+        name: Postel
+        itemWeight: 30.0
+        itemsCount: 7
         coordinates:
           x: 80.0
           y: 160.0
@@ -169,9 +169,9 @@ isles:
           x: 110.0
           y: 180.0
       - &storeGoods5
-        name: Jablko
-        itemWeight: 1.0
-        itemsCount: 10
+        name: Skříň
+        itemWeight: 32.0
+        itemsCount: 18
         coordinates:
           x: 80.0
           y: 200.0
@@ -179,8 +179,8 @@ isles:
           x: 110.0
           y: 220.0
       - &storeGoods6
-        name: Jablko
-        itemWeight: 1.0
+        name: Dveře
+        itemWeight: 9.0
         itemsCount: 8
         coordinates:
           x: 120.0
@@ -189,9 +189,9 @@ isles:
           x: 110.0
           y: 60.0
       - &storeGoods7
-        name: Jablko
-        itemWeight: 1.0
-        itemsCount: 10
+        name: PC stůl
+        itemWeight: 20.0
+        itemsCount: 32
         coordinates:
           x: 120.0
           y: 80.0
@@ -199,9 +199,9 @@ isles:
           x: 110.0
           y: 100.0
       - &storeGoods8
-        name: Jablko
-        itemWeight: 1.0
-        itemsCount: 10
+        name: Police
+        itemWeight: 5.0
+        itemsCount: 29
         coordinates:
           x: 120.0
           y: 120.0
@@ -209,9 +209,9 @@ isles:
           x: 110.0
           y: 140.0
       - &storeGoods9
-        name: Jablko
-        itemWeight: 1.0
-        itemsCount: 10
+        name: Zrcadlo
+        itemWeight: 5.0
+        itemsCount: 49
         coordinates:
           x: 120.0
           y: 160.0
@@ -219,9 +219,9 @@ isles:
           x: 110.0
           y: 180.0
       - &storeGoods10
-        name: Jablko
-        itemWeight: 1.0
-        itemsCount: 10
+        name: Lampa
+        itemWeight: 8.0
+        itemsCount: 48
         coordinates:
           x: 120.0
           y: 200.0
@@ -231,15 +231,15 @@ isles:
   - &Isle3
     start:
       x: 170.0
-      y: 40.0
+      y: 20.0
     end:
       x: 170.0
       y: 250.0
     storeGoodsList:
       - &storeGoods1
-        name: Jablko
-        itemWeight: 1.0
-        itemsCount: 8
+        name: Morče
+        itemWeight: 4.0
+        itemsCount: 30
         coordinates:
           x: 140.0
           y: 40.0
@@ -247,8 +247,8 @@ isles:
           x: 170.0
           y: 60.0
       - &storeGoods2
-        name: Jablko
-        itemWeight: 1.0
+        name: Pes
+        itemWeight: 30.0
         itemsCount: 10
         coordinates:
           x: 140.0
@@ -257,9 +257,9 @@ isles:
           x: 170.0
           y: 100.0
       - &storeGoods3
-        name: Jablko
-        itemWeight: 1.0
-        itemsCount: 10
+        name: Kočka
+        itemWeight: 10.0
+        itemsCount: 100
         coordinates:
           x: 140.0
           y: 120.0
@@ -267,9 +267,9 @@ isles:
           x: 170.0
           y: 140.0
       - &storeGoods4
-        name: Jablko
-        itemWeight: 1.0
-        itemsCount: 10
+        name: Křeček
+        itemWeight: 2.0
+        itemsCount: 200
         coordinates:
           x: 140.0
           y: 160.0
@@ -277,8 +277,8 @@ isles:
           x: 170.0
           y: 180.0
       - &storeGoods5
-        name: Jablko
-        itemWeight: 1.0
+        name: Had
+        itemWeight: 2.0
         itemsCount: 10
         coordinates:
           x: 140.0
@@ -287,9 +287,9 @@ isles:
           x: 170.0
           y: 220.0
       - &storeGoods6
-        name: Jablko
-        itemWeight: 1.0
-        itemsCount: 8
+        name: Pavouk
+        itemWeight: 4.0
+        itemsCount: 200
         coordinates:
           x: 180.0
           y: 40.0
@@ -297,9 +297,9 @@ isles:
           x: 170.0
           y: 60.0
       - &storeGoods7
-        name: Jablko
-        itemWeight: 1.0
-        itemsCount: 10
+        name: Tygr
+        itemWeight: 40.0
+        itemsCount: 3
         coordinates:
           x: 180.0
           y: 80.0
@@ -307,9 +307,9 @@ isles:
           x: 170.0
           y: 100.0
       - &storeGoods8
-        name: Jablko
-        itemWeight: 1.0
-        itemsCount: 10
+        name: Slon
+        itemWeight: 50.0
+        itemsCount: 20
         coordinates:
           x: 180.0
           y: 120.0
@@ -317,8 +317,8 @@ isles:
           x: 170.0
           y: 140.0
       - &storeGoods9
-        name: Jablko
-        itemWeight: 1.0
+        name: Činčila
+        itemWeight: 3.0
         itemsCount: 10
         coordinates:
           x: 180.0
@@ -327,9 +327,9 @@ isles:
           x: 170.0
           y: 180.0
       - &storeGoods10
-        name: Jablko
-        itemWeight: 1.0
-        itemsCount: 10
+        name: Papoušek
+        itemWeight: 7.0
+        itemsCount: 30
         coordinates:
           x: 180.0
           y: 200.0
@@ -339,15 +339,15 @@ isles:
   - &Isle4
     start:
       x: 230.0
-      y: 40.0
+      y: 20.0
     end:
       x: 230.0
       y: 250.0
     storeGoodsList:
       - &storeGoods1
-        name: Jablko
-        itemWeight: 1.0
-        itemsCount: 8
+        name: Žehlička
+        itemWeight: 3.0
+        itemsCount: 30
         coordinates:
           x: 200.0
           y: 40.0
@@ -355,9 +355,9 @@ isles:
           x: 230.0
           y: 60.0
       - &storeGoods2
-        name: Jablko
-        itemWeight: 1.0
-        itemsCount: 10
+        name: PC
+        itemWeight: 10.0
+        itemsCount: 29
         coordinates:
           x: 200.0
           y: 80.0
@@ -365,9 +365,9 @@ isles:
           x: 230.0
           y: 100.0
       - &storeGoods3
-        name: Jablko
-        itemWeight: 1.0
-        itemsCount: 10
+        name: Macbook
+        itemWeight: 4.0
+        itemsCount: 5
         coordinates:
           x: 200.0
           y: 120.0
@@ -375,9 +375,9 @@ isles:
           x: 230.0
           y: 140.0
       - &storeGoods4
-        name: Jablko
+        name: Telefon
         itemWeight: 1.0
-        itemsCount: 10
+        itemsCount: 100
         coordinates:
           x: 200.0
           y: 160.0
@@ -385,9 +385,9 @@ isles:
           x: 230.0
           y: 180.0
       - &storeGoods5
-        name: Jablko
-        itemWeight: 1.0
-        itemsCount: 10
+        name: Router
+        itemWeight: 3.0
+        itemsCount: 100
         coordinates:
           x: 200.0
           y: 200.0
@@ -395,9 +395,9 @@ isles:
           x: 230.0
           y: 220.0
       - &storeGoods6
-        name: Jablko
-        itemWeight: 1.0
-        itemsCount: 8
+        name: Klávesnice
+        itemWeight: 30.0
+        itemsCount: 90
         coordinates:
           x: 240.0
           y: 40.0
@@ -405,9 +405,9 @@ isles:
           x: 230.0
           y: 60.0
       - &storeGoods7
-        name: Jablko
-        itemWeight: 1.0
-        itemsCount: 10
+        name: Vysavač
+        itemWeight: 25.0
+        itemsCount: 28
         coordinates:
           x: 240.0
           y: 80.0
@@ -415,8 +415,8 @@ isles:
           x: 230.0
           y: 100.0
       - &storeGoods8
-        name: Jablko
-        itemWeight: 1.0
+        name: Myčka
+        itemWeight: 50.0
         itemsCount: 10
         coordinates:
           x: 240.0
@@ -425,9 +425,9 @@ isles:
           x: 230.0
           y: 140.0
       - &storeGoods9
-        name: Jablko
-        itemWeight: 1.0
-        itemsCount: 10
+        name: Lednice
+        itemWeight: 40.0
+        itemsCount: 78
         coordinates:
           x: 240.0
           y: 160.0
@@ -435,9 +435,9 @@ isles:
           x: 230.0
           y: 180.0
       - &storeGoods10
-        name: Jablko
-        itemWeight: 1.0
-        itemsCount: 10
+        name: Sporák
+        itemWeight: 55.0
+        itemsCount: 48
         coordinates:
           x: 240.0
           y: 200.0
@@ -447,15 +447,15 @@ isles:
   - &Isle5
     start:
       x: 290.0
-      y: 40.0
+      y: 20.0
     end:
       x: 290.0
       y: 250.0
     storeGoodsList:
       - &storeGoods1
-        name: Jablko
+        name: Utěrka
         itemWeight: 1.0
-        itemsCount: 8
+        itemsCount: 60
         coordinates:
           x: 260.0
           y: 40.0
@@ -463,9 +463,9 @@ isles:
           x: 290.0
           y: 60.0
       - &storeGoods2
-        name: Jablko
-        itemWeight: 1.0
-        itemsCount: 10
+        name: Váleček
+        itemWeight: 3.0
+        itemsCount: 39
         coordinates:
           x: 260.0
           y: 80.0
@@ -473,9 +473,9 @@ isles:
           x: 290.0
           y: 100.0
       - &storeGoods3
-        name: Jablko
-        itemWeight: 1.0
-        itemsCount: 10
+        name: Forma
+        itemWeight: 4.0
+        itemsCount: 36
         coordinates:
           x: 260.0
           y: 120.0
@@ -483,9 +483,9 @@ isles:
           x: 290.0
           y: 140.0
       - &storeGoods4
-        name: Jablko
-        itemWeight: 1.0
-        itemsCount: 10
+        name: Hrnek
+        itemWeight: 2.0
+        itemsCount: 89
         coordinates:
           x: 260.0
           y: 160.0
@@ -493,9 +493,9 @@ isles:
           x: 290.0
           y: 180.0
       - &storeGoods5
-        name: Jablko
+        name: Talíř
         itemWeight: 1.0
-        itemsCount: 10
+        itemsCount: 30
         coordinates:
           x: 260.0
           y: 200.0
@@ -503,9 +503,9 @@ isles:
           x: 290.0
           y: 220.0
       - &storeGoods6
-        name: Jablko
+        name: Prostírání
         itemWeight: 1.0
-        itemsCount: 8
+        itemsCount: 90
         coordinates:
           x: 300.0
           y: 40.0
@@ -513,9 +513,9 @@ isles:
           x: 290.0
           y: 60.0
       - &storeGoods7
-        name: Jablko
-        itemWeight: 1.0
-        itemsCount: 10
+        name: Ubrus
+        itemWeight: 3.0
+        itemsCount: 20
         coordinates:
           x: 300.0
           y: 80.0
@@ -523,9 +523,9 @@ isles:
           x: 290.0
           y: 100.0
       - &storeGoods8
-        name: Jablko
+        name: Nůžky
         itemWeight: 1.0
-        itemsCount: 10
+        itemsCount: 105
         coordinates:
           x: 300.0
           y: 120.0
@@ -533,9 +533,9 @@ isles:
           x: 290.0
           y: 140.0
       - &storeGoods9
-        name: Jablko
+        name: Izolepa
         itemWeight: 1.0
-        itemsCount: 10
+        itemsCount: 50
         coordinates:
           x: 300.0
           y: 160.0
@@ -543,9 +543,9 @@ isles:
           x: 290.0
           y: 180.0
       - &storeGoods10
-        name: Jablko
-        itemWeight: 1.0
-        itemsCount: 10
+        name: Kniha
+        itemWeight: 3.0
+        itemsCount: 40
         coordinates:
           x: 300.0
           y: 200.0
@@ -555,7 +555,7 @@ isles:
   - &Isle6
     start:
       x: 350.0
-      y: 40.0
+      y: 20.0
     end:
       x: 350.0
       y: 250.0
@@ -571,8 +571,8 @@ isles:
           x: 350.0
           y: 60.0
       - &storeGoods2
-        name: Jablko
-        itemWeight: 1.0
+        name: Avokádo
+        itemWeight: 3.0
         itemsCount: 10
         coordinates:
           x: 320.0
@@ -581,9 +581,9 @@ isles:
           x: 350.0
           y: 100.0
       - &storeGoods3
-        name: Jablko
-        itemWeight: 1.0
-        itemsCount: 10
+        name: Celer
+        itemWeight: 4.0
+        itemsCount: 40
         coordinates:
           x: 320.0
           y: 120.0
@@ -591,9 +591,9 @@ isles:
           x: 350.0
           y: 140.0
       - &storeGoods4
-        name: Jablko
-        itemWeight: 1.0
-        itemsCount: 10
+        name: Brambora
+        itemWeight: 4.0
+        itemsCount: 4
         coordinates:
           x: 320.0
           y: 160.0
@@ -601,9 +601,9 @@ isles:
           x: 350.0
           y: 180.0
       - &storeGoods5
-        name: Jablko
+        name: Pomeranč
         itemWeight: 1.0
-        itemsCount: 10
+        itemsCount: 40
         coordinates:
           x: 320.0
           y: 200.0
@@ -611,9 +611,9 @@ isles:
           x: 350.0
           y: 220.0
       - &storeGoods6
-        name: Jablko
-        itemWeight: 1.0
-        itemsCount: 8
+        name: Hruška
+        itemWeight: 1.5
+        itemsCount: 80
         coordinates:
           x: 360.0
           y: 40.0
@@ -621,7 +621,7 @@ isles:
           x: 350.0
           y: 60.0
       - &storeGoods7
-        name: Jablko
+        name: Propiska
         itemWeight: 1.0
         itemsCount: 10
         coordinates:
@@ -631,8 +631,8 @@ isles:
           x: 350.0
           y: 100.0
       - &storeGoods8
-        name: Jablko
-        itemWeight: 1.0
+        name: Meloun
+        itemWeight: 10.0
         itemsCount: 10
         coordinates:
           x: 360.0
@@ -641,7 +641,7 @@ isles:
           x: 350.0
           y: 140.0
       - &storeGoods9
-        name: Jablko
+        name: Izolepa
         itemWeight: 1.0
         itemsCount: 10
         coordinates:
@@ -651,9 +651,9 @@ isles:
           x: 350.0
           y: 180.0
       - &storeGoods10
-        name: Jablko
-        itemWeight: 1.0
-        itemsCount: 10
+        name: Křeček
+        itemWeight: 2.0
+        itemsCount: 29
         coordinates:
           x: 360.0
           y: 200.0
@@ -663,14 +663,14 @@ isles:
   - &Isle7
     start:
       x: 410.0
-      y: 40.0
+      y: 20.0
     end:
       x: 410.0
       y: 250.0
     storeGoodsList:
       - &storeGoods1
-        name: Jablko
-        itemWeight: 1.0
+        name: PC
+        itemWeight: 10.0
         itemsCount: 8
         coordinates:
           x: 380.0
@@ -679,9 +679,9 @@ isles:
           x: 410.0
           y: 60.0
       - &storeGoods2
-        name: Jablko
-        itemWeight: 1.0
-        itemsCount: 10
+        name: Police
+        itemWeight: 4.0
+        itemsCount: 12
         coordinates:
           x: 380.0
           y: 80.0
@@ -689,9 +689,9 @@ isles:
           x: 410.0
           y: 100.0
       - &storeGoods3
-        name: Jablko
+        name: Telefon
         itemWeight: 1.0
-        itemsCount: 10
+        itemsCount: 20
         coordinates:
           x: 380.0
           y: 120.0
@@ -699,9 +699,9 @@ isles:
           x: 410.0
           y: 140.0
       - &storeGoods4
-        name: Jablko
-        itemWeight: 1.0
-        itemsCount: 10
+        name: Zrcadlo
+        itemWeight: 5.0
+        itemsCount: 20
         coordinates:
           x: 380.0
           y: 160.0
@@ -709,9 +709,9 @@ isles:
           x: 410.0
           y: 180.0
       - &storeGoods5
-        name: Jablko
-        itemWeight: 1.0
-        itemsCount: 10
+        name: Pavouk
+        itemWeight: 4.0
+        itemsCount: 200
         coordinates:
           x: 380.0
           y: 200.0
@@ -719,8 +719,8 @@ isles:
           x: 410.0
           y: 220.0
       - &storeGoods6
-        name: Jablko
-        itemWeight: 1.0
+        name: Lampa
+        itemWeight: 8.0
         itemsCount: 8
         coordinates:
           x: 420.0
@@ -729,9 +729,9 @@ isles:
           x: 410.0
           y: 60.0
       - &storeGoods7
-        name: Jablko
-        itemWeight: 1.0
-        itemsCount: 10
+        name: Křeček
+        itemWeight: 2.0
+        itemsCount: 30
         coordinates:
           x: 420.0
           y: 80.0
@@ -739,8 +739,8 @@ isles:
           x: 410.0
           y: 100.0
       - &storeGoods8
-        name: Jablko
-        itemWeight: 1.0
+        name: Vysavač
+        itemWeight: 25.0
         itemsCount: 10
         coordinates:
           x: 420.0
@@ -749,9 +749,9 @@ isles:
           x: 410.0
           y: 140.0
       - &storeGoods9
-        name: Jablko
-        itemWeight: 1.0
-        itemsCount: 10
+        name: Židle
+        itemWeight: 5.0
+        itemsCount: 12
         coordinates:
           x: 420.0
           y: 160.0
@@ -759,9 +759,9 @@ isles:
           x: 410.0
           y: 180.0
       - &storeGoods10
-        name: Jablko
-        itemWeight: 1.0
-        itemsCount: 10
+        name: Pes
+        itemWeight: 30.0
+        itemsCount: 2
         coordinates:
           x: 420.0
           y: 200.0
@@ -771,14 +771,14 @@ isles:
   - &Isle8
     start:
       x: 470.0
-      y: 40.0
+      y: 20.0
     end:
       x: 470.0
       y: 250.0
     storeGoodsList:
       - &storeGoods1
-        name: Jablko
-        itemWeight: 1.0
+        name: Forma
+        itemWeight: 4.0
         itemsCount: 8
         coordinates:
           x: 440.0
@@ -787,7 +787,7 @@ isles:
           x: 470.0
           y: 60.0
       - &storeGoods2
-        name: Jablko
+        name: Pomeranč
         itemWeight: 1.0
         itemsCount: 10
         coordinates:
@@ -797,8 +797,8 @@ isles:
           x: 470.0
           y: 100.0
       - &storeGoods3
-        name: Jablko
-        itemWeight: 1.0
+        name: Tygr
+        itemWeight: 40.0
         itemsCount: 10
         coordinates:
           x: 440.0
@@ -807,9 +807,9 @@ isles:
           x: 470.0
           y: 140.0
       - &storeGoods4
-        name: Jablko
-        itemWeight: 1.0
-        itemsCount: 10
+        name: Stůl
+        itemWeight: 20.0
+        itemsCount: 28
         coordinates:
           x: 440.0
           y: 160.0
@@ -817,8 +817,8 @@ isles:
           x: 470.0
           y: 180.0
       - &storeGoods5
-        name: Jablko
-        itemWeight: 1.0
+        name: Police
+        itemWeight: 5.0
         itemsCount: 10
         coordinates:
           x: 440.0
@@ -827,8 +827,8 @@ isles:
           x: 470.0
           y: 220.0
       - &storeGoods6
-        name: Jablko
-        itemWeight: 1.0
+        name: Slon
+        itemWeight: 50.0
         itemsCount: 8
         coordinates:
           x: 480.0
@@ -837,9 +837,9 @@ isles:
           x: 470.0
           y: 60.0
       - &storeGoods7
-        name: Jablko
-        itemWeight: 1.0
-        itemsCount: 10
+        name: Ubrus
+        itemWeight: 3.0
+        itemsCount: 15
         coordinates:
           x: 480.0
           y: 80.0
@@ -847,9 +847,9 @@ isles:
           x: 470.0
           y: 100.0
       - &storeGoods8
-        name: Jablko
-        itemWeight: 1.0
-        itemsCount: 10
+        name: Router
+        itemWeight: 3.0
+        itemsCount: 5
         coordinates:
           x: 480.0
           y: 120.0
@@ -857,9 +857,9 @@ isles:
           x: 470.0
           y: 140.0
       - &storeGoods9
-        name: Jablko
-        itemWeight: 1.0
-        itemsCount: 10
+        name: Hrnek
+        itemWeight: 2.0
+        itemsCount: 60
         coordinates:
           x: 480.0
           y: 160.0
@@ -867,8 +867,8 @@ isles:
           x: 470.0
           y: 180.0
       - &storeGoods10
-        name: Jablko
-        itemWeight: 1.0
+        name: Lednice
+        itemWeight: 40.0
         itemsCount: 10
         coordinates:
           x: 480.0
@@ -885,9 +885,9 @@ isles:
       y: 480.0
     storeGoodsList:
       - &storeGoods1
-        name: Jablko
+        name: Propiska
         itemWeight: 1.0
-        itemsCount: 8
+        itemsCount: 40
         coordinates:
           x: 20.0
           y: 260.0
@@ -895,9 +895,9 @@ isles:
           x: 50.0
           y: 280.0
       - &storeGoods2
-        name: Jablko
-        itemWeight: 1.0
-        itemsCount: 10
+        name: Křeček
+        itemWeight: 2.0
+        itemsCount: 30
         coordinates:
           x: 20.0
           y: 300.0
@@ -905,9 +905,9 @@ isles:
           x: 50.0
           y: 320.0
       - &storeGoods3
-        name: Jablko
-        itemWeight: 1.0
-        itemsCount: 10
+        name: Klávesnice
+        itemWeight: 30.0
+        itemsCount: 40
         coordinates:
           x: 20.0
           y: 340.0
@@ -915,9 +915,9 @@ isles:
           x: 50.0
           y: 360.0
       - &storeGoods4
-        name: Jablko
-        itemWeight: 1.0
-        itemsCount: 10
+        name: Myčka
+        itemWeight: 50.0
+        itemsCount: 23
         coordinates:
           x: 20.0
           y: 380.0
@@ -925,8 +925,8 @@ isles:
           x: 50.0
           y: 400.0
       - &storeGoods5
-        name: Jablko
-        itemWeight: 1.0
+        name: Macbook
+        itemWeight: 4.0
         itemsCount: 10
         coordinates:
           x: 20.0
@@ -935,8 +935,8 @@ isles:
           x: 50.0
           y: 440.0
       - &storeGoods6
-        name: Jablko
-        itemWeight: 1.0
+        name: Žehlička
+        itemWeight: 3.0
         itemsCount: 8
         coordinates:
           x: 60.0
@@ -945,9 +945,9 @@ isles:
           x: 50.0
           y: 280.0
       - &storeGoods7
-        name: Jablko
-        itemWeight: 1.0
-        itemsCount: 10
+        name: Meloun
+        itemWeight: 10.0
+        itemsCount: 30
         coordinates:
           x: 60.0
           y: 300.0
@@ -955,9 +955,9 @@ isles:
           x: 50.0
           y: 320.0
       - &storeGoods8
-        name: Jablko
-        itemWeight: 1.0
-        itemsCount: 10
+        name: Papoušek
+        itemWeight: 7.0
+        itemsCount: 14
         coordinates:
           x: 60.0
           y: 340.0
@@ -965,9 +965,9 @@ isles:
           x: 50.0
           y: 360.0
       - &storeGoods9
-        name: Jablko
-        itemWeight: 1.0
-        itemsCount: 10
+        name: Kočka
+        itemWeight: 10.0
+        itemsCount: 103
         coordinates:
           x: 60.0
           y: 380.0
@@ -975,8 +975,8 @@ isles:
           x: 50.0
           y: 400.0
       - &storeGoods10
-        name: Jablko
-        itemWeight: 1.0
+        name: Dveře
+        itemWeight: 9.0
         itemsCount: 10
         coordinates:
           x: 60.0
@@ -993,8 +993,8 @@ isles:
       y: 480.0
     storeGoodsList:
       - &storeGoods1
-        name: Jablko
-        itemWeight: 1.0
+        name: Tygr
+        itemWeight: 40.0
         itemsCount: 8
         coordinates:
           x: 80.0
@@ -1003,9 +1003,9 @@ isles:
           x: 110.0
           y: 280.0
       - &storeGoods2
-        name: Jablko
-        itemWeight: 1.0
-        itemsCount: 10
+        name: Stůl
+        itemWeight: 20.0
+        itemsCount: 9
         coordinates:
           x: 80.0
           y: 300.0
@@ -1013,9 +1013,9 @@ isles:
           x: 110.0
           y: 320.0
       - &storeGoods3
-        name: Jablko
+        name: Nůžky
         itemWeight: 1.0
-        itemsCount: 10
+        itemsCount: 29
         coordinates:
           x: 80.0
           y: 340.0
@@ -1023,9 +1023,9 @@ isles:
           x: 110.0
           y: 360.0
       - &storeGoods4
-        name: Jablko
-        itemWeight: 1.0
-        itemsCount: 10
+        name: Avokádo
+        itemWeight: 3.0
+        itemsCount: 107
         coordinates:
           x: 80.0
           y: 380.0
@@ -1033,9 +1033,9 @@ isles:
           x: 110.0
           y: 400.0
       - &storeGoods5
-        name: Jablko
-        itemWeight: 1.0
-        itemsCount: 10
+        name: Forma
+        itemWeight: 4.0
+        itemsCount: 90
         coordinates:
           x: 80.0
           y: 420.0
@@ -1043,9 +1043,9 @@ isles:
           x: 110.0
           y: 440.0
       - &storeGoods6
-        name: Jablko
-        itemWeight: 1.0
-        itemsCount: 8
+        name: Had
+        itemWeight: 2.0
+        itemsCount: 30
         coordinates:
           x: 120.0
           y: 260.0
@@ -1053,9 +1053,9 @@ isles:
           x: 110.0
           y: 280.0
       - &storeGoods7
-        name: Jablko
-        itemWeight: 1.0
-        itemsCount: 10
+        name: Hrnek
+        itemWeight: 2.0
+        itemsCount: 28
         coordinates:
           x: 120.0
           y: 300.0
@@ -1063,9 +1063,9 @@ isles:
           x: 110.0
           y: 320.0
       - &storeGoods8
-        name: Jablko
-        itemWeight: 1.0
-        itemsCount: 10
+        name: Vysavač
+        itemWeight: 25.0
+        itemsCount: 89
         coordinates:
           x: 120.0
           y: 340.0
@@ -1073,9 +1073,9 @@ isles:
           x: 110.0
           y: 360.0
       - &storeGoods9
-        name: Jablko
-        itemWeight: 1.0
-        itemsCount: 10
+        name: Lednice
+        itemWeight: 40.0
+        itemsCount: 30
         coordinates:
           x: 120.0
           y: 380.0
@@ -1083,9 +1083,9 @@ isles:
           x: 110.0
           y: 400.0
       - &storeGoods10
-        name: Jablko
+        name: Talíř
         itemWeight: 1.0
-        itemsCount: 10
+        itemsCount: 50
         coordinates:
           x: 120.0
           y: 420.0
@@ -1101,9 +1101,9 @@ isles:
       y: 480.0
     storeGoodsList:
       - &storeGoods1
-        name: Jablko
-        itemWeight: 1.0
-        itemsCount: 8
+        name: Sporák
+        itemWeight: 55.0
+        itemsCount: 80
         coordinates:
           x: 140.0
           y: 260.0
@@ -1121,9 +1121,9 @@ isles:
           x: 170.0
           y: 320.0
       - &storeGoods3
-        name: Jablko
-        itemWeight: 1.0
-        itemsCount: 10
+        name: Lampa
+        itemWeight: 8.0
+        itemsCount: 40
         coordinates:
           x: 140.0
           y: 340.0
@@ -1131,9 +1131,9 @@ isles:
           x: 170.0
           y: 360.0
       - &storeGoods4
-        name: Jablko
-        itemWeight: 1.0
-        itemsCount: 10
+        name: Papoušek
+        itemWeight: 7.0
+        itemsCount: 38
         coordinates:
           x: 140.0
           y: 380.0
@@ -1141,9 +1141,9 @@ isles:
           x: 170.0
           y: 400.0
       - &storeGoods5
-        name: Jablko
+        name: Jahoda
         itemWeight: 1.0
-        itemsCount: 10
+        itemsCount: 200
         coordinates:
           x: 140.0
           y: 420.0
@@ -1151,9 +1151,9 @@ isles:
           x: 170.0
           y: 440.0
       - &storeGoods6
-        name: Jablko
-        itemWeight: 1.0
-        itemsCount: 8
+        name: PC
+        itemWeight: 10.0
+        itemsCount: 82
         coordinates:
           x: 180.0
           y: 260.0
@@ -1171,9 +1171,9 @@ isles:
           x: 170.0
           y: 320.0
       - &storeGoods8
-        name: Jablko
-        itemWeight: 1.0
-        itemsCount: 10
+        name: Macbook
+        itemWeight: 4.0
+        itemsCount: 2
         coordinates:
           x: 180.0
           y: 340.0
@@ -1181,8 +1181,8 @@ isles:
           x: 170.0
           y: 360.0
       - &storeGoods9
-        name: Jablko
-        itemWeight: 1.0
+        name: Brambora
+        itemWeight: 4.0
         itemsCount: 10
         coordinates:
           x: 180.0
@@ -1191,9 +1191,9 @@ isles:
           x: 170.0
           y: 400.0
       - &storeGoods10
-        name: Jablko
+        name: Utěrka
         itemWeight: 1.0
-        itemsCount: 10
+        itemsCount: 60
         coordinates:
           x: 180.0
           y: 420.0
@@ -1209,9 +1209,9 @@ isles:
       y: 480.0
     storeGoodsList:
       - &storeGoods1
-        name: Jablko
-        itemWeight: 1.0
-        itemsCount: 8
+        name: Router
+        itemWeight: 3.0
+        itemsCount: 90
         coordinates:
           x: 200.0
           y: 260.0
@@ -1219,8 +1219,8 @@ isles:
           x: 230.0
           y: 280.0
       - &storeGoods2
-        name: Jablko
-        itemWeight: 1.0
+        name: Rajče
+        itemWeight: 2.0
         itemsCount: 10
         coordinates:
           x: 200.0
@@ -1239,9 +1239,9 @@ isles:
           x: 230.0
           y: 360.0
       - &storeGoods4
-        name: Jablko
-        itemWeight: 1.0
-        itemsCount: 10
+        name: Avokádo
+        itemWeight: 3.0
+        itemsCount: 40
         coordinates:
           x: 200.0
           y: 380.0
@@ -1249,8 +1249,8 @@ isles:
           x: 230.0
           y: 400.0
       - &storeGoods5
-        name: Jablko
-        itemWeight: 1.0
+        name: Kočka
+        itemWeight: 10.0
         itemsCount: 10
         coordinates:
           x: 200.0
@@ -1259,7 +1259,7 @@ isles:
           x: 230.0
           y: 440.0
       - &storeGoods6
-        name: Jablko
+        name: Utěrka
         itemWeight: 1.0
         itemsCount: 8
         coordinates:
@@ -1269,9 +1269,9 @@ isles:
           x: 230.0
           y: 280.0
       - &storeGoods7
-        name: Jablko
+        name: Pomeranč
         itemWeight: 1.0
-        itemsCount: 10
+        itemsCount: 20
         coordinates:
           x: 240.0
           y: 300.0
@@ -1289,9 +1289,9 @@ isles:
           x: 230.0
           y: 360.0
       - &storeGoods9
-        name: Jablko
-        itemWeight: 1.0
-        itemsCount: 10
+        name: Celer
+        itemWeight: 4.0
+        itemsCount: 30
         coordinates:
           x: 240.0
           y: 380.0
@@ -1299,9 +1299,9 @@ isles:
           x: 230.0
           y: 400.0
       - &storeGoods10
-        name: Jablko
-        itemWeight: 1.0
-        itemsCount: 10
+        name: Řeřicha
+        itemWeight: 6.0
+        itemsCount: 28
         coordinates:
           x: 240.0
           y: 420.0
@@ -1317,9 +1317,9 @@ isles:
       y: 480.0
     storeGoodsList:
       - &storeGoods1
-        name: Jablko
-        itemWeight: 1.0
-        itemsCount: 8
+        name: Bambus
+        itemWeight: 12.0
+        itemsCount: 20
         coordinates:
           x: 260.0
           y: 260.0
@@ -1327,9 +1327,9 @@ isles:
           x: 290.0
           y: 280.0
       - &storeGoods2
-        name: Jablko
+        name: Podsedák
         itemWeight: 1.0
-        itemsCount: 10
+        itemsCount: 103
         coordinates:
           x: 260.0
           y: 300.0
@@ -1337,9 +1337,9 @@ isles:
           x: 290.0
           y: 320.0
       - &storeGoods3
-        name: Jablko
-        itemWeight: 1.0
-        itemsCount: 10
+        name: Váleček
+        itemWeight: 3.0
+        itemsCount: 76
         coordinates:
           x: 260.0
           y: 340.0
@@ -1347,9 +1347,9 @@ isles:
           x: 290.0
           y: 360.0
       - &storeGoods4
-        name: Jablko
-        itemWeight: 1.0
-        itemsCount: 10
+        name: Miska
+        itemWeight: 2.0
+        itemsCount: 38
         coordinates:
           x: 260.0
           y: 380.0
@@ -1632,3 +1632,287 @@ isles:
         stopCoordinates:
           x: 410.0
           y: 440.0
+  - &Isle16
+    start:
+      x: 470.0
+      y: 250.0
+    end:
+      x: 470.0
+      y: 480.0
+    storeGoodsList:
+      - &storeGoods1
+        name: Morče
+        itemWeight: 3.0
+        itemsCount: 29
+        coordinates:
+          x: 440.0
+          y: 260.0
+        stopCoordinates:
+          x: 470.0
+          y: 280.0
+      - &storeGoods2
+        name: Ananas
+        itemWeight: 3.0
+        itemsCount: 103
+        coordinates:
+          x: 440.0
+          y: 300.0
+        stopCoordinates:
+          x: 470.0
+          y: 320.0
+      - &storeGoods3
+        name: Jablko
+        itemWeight: 1.0
+        itemsCount: 10
+        coordinates:
+          x: 440.0
+          y: 340.0
+        stopCoordinates:
+          x: 470.0
+          y: 360.0
+      - &storeGoods4
+        name: Jablko
+        itemWeight: 1.0
+        itemsCount: 10
+        coordinates:
+          x: 440.0
+          y: 380.0
+        stopCoordinates:
+          x: 470.0
+          y: 400.0
+      - &storeGoods5
+        name: Jablko
+        itemWeight: 1.0
+        itemsCount: 10
+        coordinates:
+          x: 440.0
+          y: 420.0
+        stopCoordinates:
+          x: 470.0
+          y: 440.0
+      - &storeGoods6
+        name: Jablko
+        itemWeight: 1.0
+        itemsCount: 8
+        coordinates:
+          x: 480.0
+          y: 260.0
+        stopCoordinates:
+          x: 470.0
+          y: 280.0
+      - &storeGoods7
+        name: Jablko
+        itemWeight: 1.0
+        itemsCount: 10
+        coordinates:
+          x: 480.0
+          y: 300.0
+        stopCoordinates:
+          x: 470.0
+          y: 320.0
+      - &storeGoods8
+        name: Jablko
+        itemWeight: 1.0
+        itemsCount: 10
+        coordinates:
+          x: 480.0
+          y: 340.0
+        stopCoordinates:
+          x: 470.0
+          y: 360.0
+      - &storeGoods9
+        name: Jablko
+        itemWeight: 1.0
+        itemsCount: 10
+        coordinates:
+          x: 480.0
+          y: 380.0
+        stopCoordinates:
+          x: 470.0
+          y: 400.0
+      - &storeGoods10
+        name: Jablko
+        itemWeight: 1.0
+        itemsCount: 10
+        coordinates:
+          x: 480.0
+          y: 420.0
+        stopCoordinates:
+          x: 470.0
+          y: 440.0
+  - &Isle17
+    start:
+      x: 50.0
+      y: 20.0
+    end:
+      x: 110.0
+      y: 20.0
+  - &Isle18
+    start:
+      x: 110.0
+      y: 20.0
+    end:
+      x: 170.0
+      y: 20.0
+  - &Isle19
+    start:
+      x: 170.0
+      y: 20.0
+    end:
+      x: 230.0
+      y: 20.0
+  - &Isle20
+    start:
+      x: 230.0
+      y: 20.0
+    end:
+      x: 290.0
+      y: 20.0
+  - &Isle21
+    start:
+      x: 290.0
+      y: 20.0
+    end:
+      x: 350.0
+      y: 20.0
+  - &Isle22
+    start:
+      x: 350.0
+      y: 20.0
+    end:
+      x: 410.0
+      y: 20.0
+  - &Isle23
+    start:
+      x: 410.0
+      y: 20.0
+    end:
+      x: 470.0
+      y: 20.0
+  - &Isle24
+    start:
+      x: 50.0
+      y: 250.0
+    end:
+      x: 110.0
+      y: 250.0
+  - &Isle25
+    start:
+      x: 110.0
+      y: 250.0
+    end:
+      x: 170.0
+      y: 250.0
+  - &Isle26
+    start:
+      x: 170.0
+      y: 250.0
+    end:
+      x: 230.0
+      y: 250.0
+  - &Isle27
+    start:
+      x: 230.0
+      y: 250.0
+    end:
+      x: 290.0
+      y: 250.0
+  - &Isle28
+    start:
+      x: 290.0
+      y: 250.0
+    end:
+      x: 350.0
+      y: 250.0
+  - &Isle29
+    start:
+      x: 350.0
+      y: 250.0
+    end:
+      x: 410.0
+      y: 250.0
+  - &Isle30
+    start:
+      x: 410.0
+      y: 250.0
+    end:
+      x: 470.0
+      y: 250.0
+  - &Isle31
+    start:
+      x: 50.0
+      y: 480.0
+    end:
+      x: 110.0
+      y: 480.0
+  - &Isle32
+    start:
+      x: 110.0
+      y: 480.0
+    end:
+      x: 170.0
+      y: 480.0
+  - &Isle33
+    start:
+      x: 170.0
+      y: 480.0
+    end:
+      x: 230.0
+      y: 480.0
+  - &Isle34
+    start:
+      x: 230.0
+      y: 480.0
+    end:
+      x: 290.0
+      y: 480.0
+  - &Isle35
+    start:
+      x: 290.0
+      y: 480.0
+    end:
+      x: 350.0
+      y: 480.0
+  - &Isle36
+    start:
+      x: 350.0
+      y: 480.0
+    end:
+      x: 410.0
+      y: 480.0
+  - &Isle37
+    start:
+      x: 410.0
+      y: 480.0
+    end:
+      x: 470.0
+      y: 480.0
+  - &Isle38
+    start:
+      x: 470.0
+      y: 250.0
+    end:
+      x: 520.0
+      y: 250.0
+orders:
+  - &Order1
+    id: Jana Novakova
+    toDoList:
+      Jablko: 5
+      Morče: 6
+      Ananas: 8
+  - &Order2
+    id: Maruš Young
+    toDoList:
+      Podsedák: 9
+      Bambus: 2
+  - &Order3
+    id: Martin Buchta
+    toDoList:
+      Stůl: 1
+      Talíř: 3 
+  - &Order4
+    id: Alice Vlasatá
+    toDoList:
+      Pomeranč: 3
+      Miska: 1

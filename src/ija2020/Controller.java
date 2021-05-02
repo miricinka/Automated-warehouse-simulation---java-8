@@ -18,10 +18,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
 
 import static javafx.scene.paint.Color.*;
 
@@ -42,8 +39,10 @@ public class Controller {
     private WarehouseData warehouseData;
     private Rectangle lastClickedShelf;
     private Circle lastClickedTrolley;
+    private ArrayList<Line> paintedPath;
     private ArrayList<String> allGoodsList;
     private Timer timer;
+    private Timer timer2;
     private long simulationSpeed;
 
     public void setWarehouseData(WarehouseData warehouseData) {
@@ -68,12 +67,16 @@ public class Controller {
         Text storeGoodsInfo = new Text(10, 20, "");
 
         for(Isle isle : warehouseData.getIsles()){
+            //spocitani ceny ulicky
+            isle.setCost();
             Line line = new Line(isle.getStart().getX(), isle.getStart().getY(), isle.getEnd().getX(), isle.getEnd().getY());
             line.setStrokeWidth(4);
             line.setStroke(SLATEGRAY);
             mainPane.getChildren().add(line);
             if (isle.getStoreGoodsList() != null) {
                 for (StoreGoods storeGoods : isle.getStoreGoodsList()) {
+                    //store goods vi na ktere je isle
+                    storeGoods.setIsle(isle);
                     Rectangle shelf = new Rectangle(storeGoods.getCoordinates().getX(), storeGoods.getCoordinates().getY(), 20, 40);
                     shelf.setStroke(BLACK);
                     shelf.setStrokeWidth(2);
@@ -83,6 +86,10 @@ public class Controller {
                     shelf.setOnMouseClicked(new EventHandler<MouseEvent>() {
                         @Override
                         public void handle(MouseEvent event) {
+                            if(paintedPath != null){
+                                for(Line line:paintedPath){
+                                    mainPane.getChildren().remove(line); }
+                            }
                             if (lastClickedShelf != null) {
                                 lastClickedShelf.setFill(PERU);
                             }
@@ -93,7 +100,7 @@ public class Controller {
                             shelf.setFill(LIME);
                             textPanel.getChildren().clear();
                             textPanel.getChildren().add(storeGoodsInfo);
-                            storeGoodsInfo.setText("Obsah: " + storeGoods.getName() + "\nPocet: " + storeGoods.getItemsCount() + "x\nHmotnost: " + storeGoods.getItemWeight() + "kg");
+                            storeGoodsInfo.setText("Obsah: " + storeGoods.getName() + "x\nHmotnost: " + storeGoods.getItemWeight() + "kg" +"\nZbývá: " + storeGoods.getItemsCount() + "\nK vyzvednutí: " + storeGoods.getReadyToDispatch());
                         }
                     });
                 }
@@ -111,7 +118,7 @@ public class Controller {
         Text trolleyInfo = new Text(10, 20, "");
 
         for(Trolley trolley : warehouseData.getTrolleys()){
-            Circle circle = new Circle(trolley.getCoordinates().getX(), trolley.getCoordinates().getY(), 6);
+            Circle circle = new Circle(trolley.getStartCoordinates().getX(), trolley.getStartCoordinates().getY(), 9);
             circle.setFill(RED);
             mainPane.getChildren().add(circle);
             trolley.addCircle(circle);
@@ -119,6 +126,10 @@ public class Controller {
             circle.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
+                    if(paintedPath != null){
+                        for(Line line:paintedPath){
+                            mainPane.getChildren().remove(line); }
+                    }
                     if (lastClickedShelf != null) {
                         lastClickedShelf.setFill(PERU);
                     }
@@ -129,7 +140,44 @@ public class Controller {
                     circle.setFill(LIME);
                     textPanel.getChildren().clear();
                     textPanel.getChildren().add(trolleyInfo);
-                    trolleyInfo.setText("Maximální kapacita: " + trolley.getCapacity() + "kg\nVyužitá kapacita: " + trolley.getUsedCapacity() + "kg");
+                    String trolleyString = "";
+                    trolleyString = "ID: " + trolley.getId() +"\nMaximální kapacita: " + trolley.getCapacity() + "kg\nVyužitá kapacita: " + trolley.getUsedCapacity() + "kg\n\n";
+                    if(trolley.getOrder() != null){
+                        Order order = trolley.getOrder();
+                        String todoList = "     Zbývá: \n";
+                        String doneList = "     Hotovo: \n";
+                        if(order.getToDoList() != null){
+                            for (Map.Entry<String,Integer> entry : order.getToDoList().entrySet()){
+                                todoList = todoList +"          "+ entry.getKey() + " " + entry.getValue() + "x\n";
+                            }
+                        }
+                        if(order.getDoneList() != null){
+                            for (Map.Entry<String,Integer> entry : order.getDoneList().entrySet()){
+                                todoList = todoList +"          "+ entry.getKey() + " " + entry.getValue() + "x\n";
+                            }
+                        }
+
+                        trolleyString = trolleyString + "Objednávka ID :" + order.getId() + "\n"+ todoList + doneList;
+                    }
+                    trolleyInfo.setText(trolleyString);
+
+                    //zvyrazneni trasy
+                    if(trolley.getPath() != null) {
+                        Coordinates start = null;
+                        Coordinates end = trolley.getWholePathFirst();
+                        paintedPath = new ArrayList<>();
+                        for(Coordinates coordinates: trolley.getWholePath()){
+                            start = end;
+                            end = coordinates;
+                            if(start != null && start != null){
+                                Line line = new Line(start.getX(), start.getY(), end.getX(), end.getY());
+                                paintedPath.add(line);
+                                line.setStrokeWidth(4);
+                                line.setStroke(LIME);
+                                mainPane.getChildren().add(line);
+                            }
+                        }
+                    }
                 }
             });
 
@@ -152,8 +200,31 @@ public class Controller {
             for (HashMap.Entry<String,Integer> entry : order.getToDoList().entrySet()){
                 textToView = textToView.concat("    "+ entry.getKey() +" "+entry.getValue() + "x\n");
             }
+            textToView = textToView + "\n";
         }
-        info.setText(textToView);
+        String trolleyString = "";
+        for (Trolley trolley: warehouseData.getTrolleys()) {
+            //trolleyString = "ID: " + trolley.getId();
+            if(trolley.getOrder() != null){
+                Order order = trolley.getOrder();
+                String todoList = "     Zbývá: \n";
+                String doneList = "     Hotovo: \n";
+                if(order.getToDoList() != null){
+                    for (Map.Entry<String,Integer> entry : order.getToDoList().entrySet()){
+                        todoList = todoList +"          "+ entry.getKey() + " " + entry.getValue() + "x\n";
+                    }
+                }
+                if(order.getDoneList() != null){
+                    for (Map.Entry<String,Integer> entry : order.getDoneList().entrySet()){
+                        todoList = todoList +"          "+ entry.getKey() + " " + entry.getValue() + "x\n";
+                    }
+                }
+
+                trolleyString = trolleyString + order.getId() +"\n Vozík: " + trolley.getId() +"\n"+ todoList + doneList + "\n";
+            }
+
+        }
+        info.setText(trolleyString+textToView);
     }
 
     @FXML
@@ -210,6 +281,66 @@ public class Controller {
         simulationTime();
     }
 
+    public List<Coordinates> calculatePath(Order order){
+        List<Coordinates> listCoords = new ArrayList<>();
+        listCoords.add(new Coordinates(520, 250));
+        listCoords.add(new Coordinates(470, 250));
+
+        //listCoords.add(new Coordinates(520, 250));
+
+        Coordinates startCoordinates = new Coordinates(520, 250);
+        HashMap<String, Integer> allGoods = new HashMap<>(order.getToDoList());
+        //System.out.println(allGoods);
+        while(!allGoods.isEmpty()){
+            StoreGoods closest = warehouseData.findNextClosestGoods(startCoordinates, allGoods);
+            //System.out.println(closest.getName());
+            //je tu vse co chceme -> smazat ze seznamu
+            if(closest.getItemsCount() >= allGoods.get(closest.getName())){
+                //odecist co jsme vzali
+                 //System.out.println(closest.getItemsCount());
+                closest.setItemsCount(closest.getItemsCount() - allGoods.get(closest.getName()));
+                //System.out.println(closest.getItemsCount());
+                closest.setReadyToDispatch(closest.getReadyToDispatch() + allGoods.get(closest.getName()));
+                allGoods.remove(closest.getName());
+            }else{ //neni vse co chceme -> vezmeme co muzem
+                int countLeft = allGoods.get(closest.getName())- closest.getItemsCount();
+                allGoods.replace(closest.getName(), countLeft);
+                closest.setReadyToDispatch(closest.getReadyToDispatch() + allGoods.get(closest.getName()));
+                closest.setItemsCount(0);
+            }
+
+            //hledat odkud jsem ted
+            Coordinates nextCoordinates = closest.getStopCoordinates();
+            while (startCoordinates.getX() != nextCoordinates.getX()){
+                //if(startCoordinates.getY() > 250 && nextCoordinates.getY() > 250){
+                 //   if(startCoordinates.getY() + nextCoordinates.getY() / 2 < 360){
+
+                 //   }
+                //}else if (startCoordinates.getY() < 250 && nextCoordinates.getY() < 250){
+
+                //}else {
+                    if(startCoordinates.getY() != 250){
+                        listCoords.add(new Coordinates(startCoordinates.getX(), 250));
+                        startCoordinates = new Coordinates(startCoordinates.getX(), 250);
+                    }else {
+                        listCoords.add(new Coordinates(nextCoordinates.getX(), 250));
+                        startCoordinates = new Coordinates(nextCoordinates.getX(), 250);
+                    }
+                //}
+
+
+            }
+            listCoords.add(nextCoordinates);
+            startCoordinates = nextCoordinates;
+            //listCoords.add(closest.getStopCoordinates());
+
+            //System.out.println(allGoods);
+        }
+        listCoords.add(new Coordinates(startCoordinates.getX(), 250));
+        listCoords.add(new Coordinates(520, 250));
+        return listCoords;
+    }
+
     public void simulationTime() {
         timer = new Timer(false);
         timer.scheduleAtFixedRate(new TimerTask() {
@@ -219,7 +350,27 @@ public class Controller {
                     Platform.runLater(()->trolley.updateCoords());
                 }
             }
-        }, 0, 300/simulationSpeed);
+        }, 0, 200/simulationSpeed);
+    }
+
+    public void checkForOrder() {
+        timer2 = new Timer(false);
+        timer2.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                for(Trolley trolley: warehouseData.getTrolleys()) {
+                    if(trolley.getOrder() == null) {
+                        Order order = warehouseData.takeNextOrder();
+                        if(order != null){
+                            List<Coordinates> path = calculatePath(order);
+                            Platform.runLater(()->trolley.setOrder(order));
+                            Platform.runLater(()->trolley.setPath(path));
+                            Platform.runLater(()->trolley.setWholePath());
+                        }
+                    }
+                }
+            }
+        }, 0, 3000);
     }
 
 }

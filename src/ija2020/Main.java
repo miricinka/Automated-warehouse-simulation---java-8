@@ -5,6 +5,7 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import javafx.application.Application;
@@ -39,20 +40,25 @@ public class Main extends Application {
         controller.setWarehouseData(warehouseData);
         controller.paintIsles(root);
 
-        Trolley vozikTest = new Trolley(20,new Coordinates(70, 60));
-        List<Coordinates> listCoords = new ArrayList<>();
-        listCoords.add(new Coordinates(70, 250));
-        listCoords.add(new Coordinates(200, 250));
-        listCoords.add(new Coordinates(70, 250));
-        listCoords.add(new Coordinates(70, 60));
-        vozikTest.setPath(listCoords);
-        warehouseData.addTrolley(vozikTest);
+        //Trolley vozikTest = new Trolley(20,new Coordinates(50, 20));
+        //vozikTest.setID("01");
+        //List<Coordinates> listCoords = new ArrayList<>();
+        //listCoords.add(new Coordinates(50, 20));
+        //listCoords.add(new Coordinates(50, 250));
+        //listCoords.add(new Coordinates(170, 250));
+        //listCoords.add(new Coordinates(170, 20));
+        //listCoords.add(new Coordinates(230, 20));
+        //vozikTest.setPath(listCoords);
+        //vozikTest.setWholePath();
+        //warehouseData.addTrolley(vozikTest);
+
 
         controller.paintTrolleys(root);
         controller.setAllGoodsList();
         controller.setupSpeed();
 
         controller.simulationTime();
+        controller.checkForOrder();
         primaryStage.show();
 
     }
