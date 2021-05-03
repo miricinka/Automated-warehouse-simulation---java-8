@@ -126,4 +126,12 @@ public class StoreGoods {
     public void setReadyToDispatch(int readyToDispatch) {
         this.readyToDispatch = readyToDispatch;
     }
+
+    @Override
+    public String toString() {
+        return "StoreGoods{" +
+                "name='" + name + '\'' +
+                ", stopCoordinates=" + stopCoordinates +
+                '}';
+    }
 }

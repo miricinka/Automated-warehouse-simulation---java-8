@@ -21,6 +21,7 @@ public class Trolley {
     private List<Coordinates> wholePath;
     private List<Coordinates> path;
     private Circle circle;
+    private List<StoreGoods> storeGoodsStops;
 
     public Trolley() {}
 
@@ -39,6 +40,13 @@ public class Trolley {
         this.id = ID;
     }
 
+    public List<StoreGoods> getStoreGoodsStops() {
+        return storeGoodsStops;
+    }
+
+    public void setStoreGoodsStops(List<StoreGoods> storeGoodsStops) {
+        this.storeGoodsStops = storeGoodsStops;
+    }
 
     /**
      * Gets max capacity of trolley
@@ -153,12 +161,31 @@ public class Trolley {
         if(path.isEmpty()){
             path = null;
             order = null;
+            storeGoodsStops = null;
             return;
         }
         Coordinates wayToGo = path.get(0);
+        //jsme na krizovatce/u zbozi
         if(wayToGo.getX() == coordinates.getX() && wayToGo.getY()==coordinates.getY()) {
+            //System.out.println(wayToGo);
             //zastavit se
             //update zbozi pokud je na zbozi
+            //podivat se jestli jsme u zastavky kde vyzvedavame zbozi
+            for(StoreGoods store :storeGoodsStops){
+                if(store.getStopCoordinates().equals(wayToGo)){
+                    int count = order.getToDoList().get(store.getName());
+                    store.setReadyToDispatch(store.getReadyToDispatch() - count);
+                    System.out.println(store.getReadyToDispatch());
+                    System.out.println(order.getToDoList());
+                    System.out.println(order.getDoneList());
+                    if(order.getDoneList() == null) {
+                        order.setDoneList(new HashMap<String, Integer>());
+                    }
+                    order.getToDoList().remove(store.getName());
+                    order.getDoneList().put(store.getName(), count);
+
+                }
+            }
             path.remove(0);
             return;
         } else if(wayToGo.getX() == coordinates.getX()) {

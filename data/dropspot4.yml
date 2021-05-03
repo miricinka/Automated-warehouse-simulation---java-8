@@ -11,14 +11,6 @@ trolleys:
     startCoordinates:
       x: 520.00
       y: 250.00
-  - &Trolley03
-    id: 03
-    capacity: 100.0
-    usedCapacity: 0.0
-    order: null
-    startCoordinates:
-      x: 520.00
-      y: 250.00
 isles:
   - &Isle1
     start:

@@ -108,6 +108,9 @@ public class WarehouseData {
             if (isle.getStoreGoodsList() != null) {
                 for (StoreGoods storeGoods : isle.getStoreGoodsList()) {
                     String name = storeGoods.getName();
+                    if(storeGoods.getItemsCount() == 0){
+                        continue;
+                    }
                     if(!goodsList.contains(name)){
                         goodsList.add(name);
                     }

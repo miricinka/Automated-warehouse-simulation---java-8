@@ -44,7 +44,7 @@ public class Controller {
     private Timer timer;
     private Timer timer2;
     private long simulationSpeed;
-
+    //private List<StoreGoods> storeGoodsStops;
     public void setWarehouseData(WarehouseData warehouseData) {
         this.warehouseData = warehouseData;
     }
@@ -126,6 +126,8 @@ public class Controller {
             circle.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
+                    System.out.println(trolley.getOrder().getToDoList());
+                    System.out.println(trolley.getOrder().getDoneList());
                     if(paintedPath != null){
                         for(Line line:paintedPath){
                             mainPane.getChildren().remove(line); }
@@ -153,7 +155,7 @@ public class Controller {
                         }
                         if(order.getDoneList() != null){
                             for (Map.Entry<String,Integer> entry : order.getDoneList().entrySet()){
-                                todoList = todoList +"          "+ entry.getKey() + " " + entry.getValue() + "x\n";
+                                doneList = doneList +"          "+ entry.getKey() + " " + entry.getValue() + "x\n";
                             }
                         }
 
@@ -216,7 +218,7 @@ public class Controller {
                 }
                 if(order.getDoneList() != null){
                     for (Map.Entry<String,Integer> entry : order.getDoneList().entrySet()){
-                        todoList = todoList +"          "+ entry.getKey() + " " + entry.getValue() + "x\n";
+                        doneList = doneList +"          "+ entry.getKey() + " " + entry.getValue() + "x\n";
                     }
                 }
 
@@ -281,8 +283,9 @@ public class Controller {
         simulationTime();
     }
 
-    public List<Coordinates> calculatePath(Order order){
+    public List<Coordinates> calculatePath(Order order, Trolley trolley){
         List<Coordinates> listCoords = new ArrayList<>();
+        List<StoreGoods> storeGoodsStops = new ArrayList<>();
         listCoords.add(new Coordinates(520, 250));
         listCoords.add(new Coordinates(470, 250));
 
@@ -290,6 +293,7 @@ public class Controller {
         HashMap<String, Integer> allGoods = new HashMap<>(order.getToDoList());
         while(!allGoods.isEmpty()){
             StoreGoods closest = warehouseData.findNextClosestGoods(startCoordinates, allGoods);
+            storeGoodsStops.add(closest);
             //je tu vse co chceme -> smazat ze seznamu
             if(closest.getItemsCount() >= allGoods.get(closest.getName())){
                 //odecist co jsme vzali
@@ -320,6 +324,7 @@ public class Controller {
         }
         listCoords.add(new Coordinates(startCoordinates.getX(), 250));
         listCoords.add(new Coordinates(520, 250));
+        trolley.setStoreGoodsStops(storeGoodsStops);
         return listCoords;
     }
 
@@ -344,10 +349,11 @@ public class Controller {
                     if(trolley.getOrder() == null) {
                         Order order = warehouseData.takeNextOrder();
                         if(order != null){
-                            List<Coordinates> path = calculatePath(order);
                             Platform.runLater(()->trolley.setOrder(order));
+                            List<Coordinates> path = calculatePath(order, trolley);
                             Platform.runLater(()->trolley.setPath(path));
                             Platform.runLater(()->trolley.setWholePath());
+                            //Platform.runLater(()->trolley.setStoreGoodsStops(storeGoodsStops));
                         }
                     }
                 }
