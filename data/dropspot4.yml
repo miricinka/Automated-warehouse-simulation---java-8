@@ -3,6 +3,14 @@ dropSpot:
     x: 520.0
     y: 250.0
 trolleys:
+  - &Trolley01
+    id: 01
+    capacity: 100.0
+    usedCapacity: 0.0
+    order: null
+    startCoordinates:
+      x: 520.00
+      y: 250.00
   - &Trolley02
     id: 02
     capacity: 100.0
@@ -1901,18 +1909,3 @@ orders:
       Jablko: 5
       Morče: 6
       Ananas: 8
-  - &Order2
-    id: Maruš Young
-    toDoList:
-      Podsedák: 9
-      Řeřicha: 7
-  - &Order3
-    id: Martin Buchta
-    toDoList:
-      Stůl: 1
-      Talíř: 3 
-  - &Order4
-    id: Alice Vlasatá
-    toDoList:
-      Pomeranč: 3
-      Miska: 1

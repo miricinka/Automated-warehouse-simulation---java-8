@@ -1,9 +1,6 @@
 package ija2020;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Class representing Warehouse Data
@@ -16,7 +13,7 @@ public class WarehouseData {
     private LinkedList<Trolley> trolleys;
     private LinkedList<Isle> isles;
     private LinkedList<Order> orders;
-    private ArrayList<String> goodsList = new ArrayList<>();
+    private ArrayList<String> goodsList;
 
     public WarehouseData() {}
 
@@ -104,20 +101,23 @@ public class WarehouseData {
     }
 
     public void setGoodsList() {
+        goodsList = new ArrayList<>();
         for (Isle isle : this.getIsles()){
             if (isle.getStoreGoodsList() != null) {
                 for (StoreGoods storeGoods : isle.getStoreGoodsList()) {
                     String name = storeGoods.getName();
                     if(storeGoods.getItemsCount() == 0){
+                        //System.out.println(name);
+                        //System.out.println(goodsList);
                         continue;
                     }
                     if(!goodsList.contains(name)){
                         goodsList.add(name);
                     }
-                    //goodsList.add(name);
                 }
             }
         }
+        java.util.Collections.sort(goodsList);
     }
 
     public ArrayList<String> getGoodsList() {
@@ -151,6 +151,9 @@ public class WarehouseData {
 
         for (Map.Entry<String,Integer> entry : allGoods.entrySet()){
             StoreGoods goods = findGoods(entry.getKey());
+            if(goods == null) {
+                return null;
+            }
             Double x1 = goods.getStopCoordinates().getX();
             Double y1 = goods.getStopCoordinates().getY();
             Double x2 = coordinates.getX();
@@ -162,5 +165,58 @@ public class WarehouseData {
             }
         }
         return closest;
+    }
+
+    public List<Isle> getIsleFromCoords (Coordinates searchedCoordinate){
+        List<Isle> resultIsleList = new ArrayList<>();
+
+        for (Isle isle: isles) {
+            Coordinates coordinate1 = isle.getStart();
+            Coordinates coordinate2 = isle.getEnd();
+
+
+            // vertikalni ulicka
+            if (coordinate1.getX() == coordinate2.getX()){
+
+                if(searchedCoordinate.getX() != coordinate1.getX()){
+                    // jsme ve vertikalni ulicce, ale cil je v horizontalni
+                    continue;
+                }
+
+                double maxY, minY;
+                if (coordinate1.getY() > coordinate2.getY()){
+                    maxY = coordinate1.getY();
+                    minY = coordinate2.getY();
+                }else{
+                    maxY = coordinate2.getY();
+                    minY = coordinate1.getY();
+                }
+
+                if(searchedCoordinate.getY() <= maxY && searchedCoordinate.getY() >= minY){
+                    resultIsleList.add(isle);
+                }
+
+            // horizontalni ulicka
+            }else {
+                if(searchedCoordinate.getY() != coordinate1.getY()){
+                    // jsme v horizontalni ulicce, ale cil je v vertikalni
+                    continue;
+                }
+
+                double maxX, minX;
+                if (coordinate1.getX() > coordinate2.getX()){
+                    maxX = coordinate1.getX();
+                    minX = coordinate2.getX();
+                }else{
+                    maxX = coordinate2.getX();
+                    minX = coordinate1.getX();
+                }
+                if(searchedCoordinate.getX() <= maxX && searchedCoordinate.getX() >= minX){
+                    resultIsleList.add(isle);
+                }
+            }
+        }
+
+        return resultIsleList;
     }
 }

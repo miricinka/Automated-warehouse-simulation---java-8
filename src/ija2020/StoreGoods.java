@@ -54,7 +54,6 @@ public class StoreGoods {
 
     /**
      * Sets weight of one item, weight must be > 0
-     * @return weight of item
      */
     public void setItemWeight(double itemWeight) throws Exception {
         if (itemWeight <= 0.0)

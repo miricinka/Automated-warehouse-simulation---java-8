@@ -34,10 +34,19 @@
                   <Insets left="20.0" right="20.0" top="10.0" />
                </VBox.margin>
             </Label>
-            <Slider>
+            <HBox prefHeight="47.0" prefWidth="250.0">
+               <children>
+                  <Button mnemonicParsing="false" onMouseClicked="#stopButtonClicked" prefHeight="27.0" prefWidth="63.0" text="Stop">
+                     <HBox.margin>
+                        <Insets left="10.0" right="5.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" onMouseClicked="#playButtonClicked" prefHeight="27.0" prefWidth="63.0" text="Play" />
+               </children>
                <VBox.margin>
-                  <Insets bottom="10.0" />
-               </VBox.margin></Slider>
+                  <Insets bottom="5.0" />
+               </VBox.margin>
+            </HBox>
             <ScrollPane prefHeight="361.0" prefWidth="250.0">
                <content>
                   <AnchorPane fx:id="textPanel" prefHeight="356.0" prefWidth="247.0" />

@@ -14,7 +14,8 @@ import java.util.concurrent.TimeUnit;
 public class Trolley {
     private String id;
     private double capacity; //kg
-    private double usedCapacity;
+    private double usedCapacity = 0.0;
+    private double usedCapacityCount;
     private Order order;
     private Coordinates coordinates;
     private Coordinates startCoordinates;
@@ -22,6 +23,7 @@ public class Trolley {
     private List<Coordinates> path;
     private Circle circle;
     private List<StoreGoods> storeGoodsStops;
+    private int sleep = 0;
 
     public Trolley() {}
 
@@ -78,6 +80,14 @@ public class Trolley {
      */
     public void setUsedCapacity(double usedCapacity) {
         this.usedCapacity = usedCapacity;
+    }
+
+    public double getUsedCapacityCount() {
+        return usedCapacityCount;
+    }
+
+    public void setUsedCapacityCount(double usedCapacityCount) {
+        this.usedCapacityCount = usedCapacityCount;
     }
 
     /**
@@ -151,6 +161,10 @@ public class Trolley {
     }
 
     public void updateCoords() {
+        if(sleep > 0){
+            sleep--;
+            return;
+        }
         if(coordinates == null) {
             coordinates = new Coordinates(startCoordinates.getX(), startCoordinates.getY());
         }
@@ -159,6 +173,7 @@ public class Trolley {
         }
         //dojel na konec cesty -> splnil objednavku
         if(path.isEmpty()){
+            usedCapacity = 0.0;
             path = null;
             order = null;
             storeGoodsStops = null;
@@ -167,22 +182,51 @@ public class Trolley {
         Coordinates wayToGo = path.get(0);
         //jsme na krizovatce/u zbozi
         if(wayToGo.getX() == coordinates.getX() && wayToGo.getY()==coordinates.getY()) {
-            //System.out.println(wayToGo);
-            //zastavit se
             //update zbozi pokud je na zbozi
             //podivat se jestli jsme u zastavky kde vyzvedavame zbozi
             for(StoreGoods store :storeGoodsStops){
                 if(store.getStopCoordinates().equals(wayToGo)){
-                    int count = order.getToDoList().get(store.getName());
-                    store.setReadyToDispatch(store.getReadyToDispatch() - count);
-                    System.out.println(store.getReadyToDispatch());
-                    System.out.println(order.getToDoList());
-                    System.out.println(order.getDoneList());
+                    //jsme u zbozi
+                    int countToDo = order.getToDoList().get(store.getName());
+
                     if(order.getDoneList() == null) {
                         order.setDoneList(new HashMap<String, Integer>());
                     }
-                    order.getToDoList().remove(store.getName());
-                    order.getDoneList().put(store.getName(), count);
+                    if(countToDo == store.getReadyToDispatch()){
+                        store.setReadyToDispatch(0);
+                        order.getToDoList().remove(store.getName());
+                        if(!order.getDoneList().containsKey(store.getName())){
+                            order.getDoneList().put(store.getName(), countToDo);
+                        }else{
+                            int countDone = order.getDoneList().get(store.getName());
+                            order.getDoneList().replace(store.getName(), countDone + countToDo);
+                        }
+                        usedCapacity = usedCapacity + store.getItemWeight() * countToDo;
+                    }
+                    if(countToDo < store.getReadyToDispatch()){
+                        store.setReadyToDispatch(store.getReadyToDispatch() - countToDo);
+                        order.getToDoList().remove(store.getName());  //?
+                        if(!order.getDoneList().containsKey(store.getName())){
+                            order.getDoneList().put(store.getName(), countToDo);
+                        }else{
+                            int countDone = order.getDoneList().get(store.getName());
+                            order.getDoneList().replace(store.getName(), countDone + countToDo);
+                        }
+                        usedCapacity = usedCapacity + store.getItemWeight() * countToDo;
+                    }else{
+                        usedCapacity = usedCapacity + store.getItemWeight() * store.getReadyToDispatch();
+                        order.getToDoList().replace(store.getName(), countToDo - store.getReadyToDispatch());
+                        if(!order.getDoneList().containsKey(store.getName())){
+                            order.getDoneList().put(store.getName(), store.getReadyToDispatch());
+                        }else{
+                            int countDone = order.getDoneList().get(store.getName());
+                            order.getDoneList().replace(store.getName(), countDone + store.getReadyToDispatch());
+                        }
+                        store.setReadyToDispatch(0);
+                    }
+
+                    //zastavit se
+                    sleep = 20;
 
                 }
             }

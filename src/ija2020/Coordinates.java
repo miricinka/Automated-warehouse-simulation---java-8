@@ -52,6 +52,11 @@ public class Coordinates {
         this.y = y;
     }
 
+    public double calcDistance(Coordinates coordinates){
+        return Math.sqrt((x-coordinates.getX())*(x-coordinates.getX()) + (y-coordinates.getY())*(y-coordinates.getY()));
+    }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

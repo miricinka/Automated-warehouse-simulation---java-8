@@ -104,7 +104,7 @@ public class Isle {
         if(start.getX() == end.getX()){
             return abs(start.getY() - end.getY());
         }else{
-            return abs(start.getX()-end.getY());
+            return abs(start.getX()-end.getX());
         }
     }
 
@@ -120,5 +120,14 @@ public class Isle {
     @Override
     public int hashCode() {
         return Objects.hash(start, end, storeGoodsList, closed);
+    }
+
+    @Override
+    public String toString() {
+        return "Isle{" +
+                "start=" + start +
+                ", end=" + end +
+                ", closed=" + closed +
+                '}';
     }
 }

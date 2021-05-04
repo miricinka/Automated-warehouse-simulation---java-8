@@ -69,8 +69,4 @@ public class Order {
         this.doneMap = doneList;
     }
 
-    //public Coordinates findGoods(String goodsName){
-    //    return new Coordinates(0.0,0.0);
-    //}
-
 }

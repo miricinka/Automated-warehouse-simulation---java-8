@@ -59,7 +59,6 @@ public class NewOrderController {
             }
         }
 
-        System.out.println(toDoList);
         //create new order
         if(toDoList.size() > 0 && !newOrderID.getText().equals("")){
             Order newOrder = new Order();

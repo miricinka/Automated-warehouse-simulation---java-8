@@ -46,7 +46,4 @@ public class Path {
         return pathList.pollFirst();
     }
 
-    //public LinkedList<Coordinates> findPath(Coordinates trolleyCoordinates, Order currentOrder, LinkedList<Isle> allIsles){
-
-    //}
 }
