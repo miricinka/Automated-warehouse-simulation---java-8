@@ -160,24 +160,27 @@ public class Trolley {
         return false;
     }
 
-    public void updateCoords() {
+    public boolean updateCoords() {
         if(sleep > 0){
             sleep--;
-            return;
+            return false;
         }
         if(coordinates == null) {
             coordinates = new Coordinates(startCoordinates.getX(), startCoordinates.getY());
         }
         if(path == null) {
-            return;
+            return false;
         }
         //dojel na konec cesty -> splnil objednavku
         if(path.isEmpty()){
             usedCapacity = 0.0;
-            path = null;
-            order = null;
             storeGoodsStops = null;
-            return;
+            path = null;
+            if(!order.getToDoList().isEmpty()){
+                return true;
+            }
+            order = null;
+            return false;
         }
         Coordinates wayToGo = path.get(0);
         //jsme na krizovatce/u zbozi
@@ -231,7 +234,7 @@ public class Trolley {
                 }
             }
             path.remove(0);
-            return;
+            return false;
         } else if(wayToGo.getX() == coordinates.getX()) {
             if(wayToGo.getY() > coordinates.getY()) {
                 coordinates.setY(coordinates.getY() + 1.0);
@@ -248,6 +251,9 @@ public class Trolley {
         //update on gui GUI
         circle.setCenterX(coordinates.getX());
         circle.setCenterY(coordinates.getY());
+
+        return false;
     }
+
 
 }

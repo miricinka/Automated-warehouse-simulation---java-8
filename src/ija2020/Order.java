@@ -10,7 +10,7 @@ import java.util.LinkedList;
  * @author <a href="xzovin00@stud.fit.vutbr.cz">Martin Zovinec</a>
  */
 public class Order {
-    String id;
+    private String id;
     HashMap<String, Integer> toDoMap;
     HashMap<String, Integer> doneMap;
 

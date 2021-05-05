@@ -313,7 +313,6 @@ public class Controller {
     }
 
     public void changeSpeed(){
-        //System.out.println(speedSlider.getValue());
         simulationSpeed = (long) speedSlider.getValue();
         timer.cancel();
         simulationTime();
@@ -323,6 +322,9 @@ public class Controller {
     }
 
     public List<Coordinates> calculatePath(Order order, Trolley trolley){
+        double usedCapacity = 0.0;
+        //trolley.setUsedCapacityCount(0.0);
+        boolean endThisOrder = false;
         List<Coordinates> listCoords = new ArrayList<>();
         //seznam zastavek pro pozdejsi aktualizace obsahu kdyz k nim vozik prijede
         List<StoreGoods> storeGoodsStops = new ArrayList<>();
@@ -337,7 +339,10 @@ public class Controller {
         //find closest goods
         HashMap<String, Integer> allGoods = new HashMap<>(order.getToDoList());
         while(!allGoods.isEmpty()){
-            StoreGoods closest = warehouseData.findNextClosestGoods(startCoordinates, allGoods);
+            StoreGoods closest = null;
+            if(usedCapacity < trolley.getCapacity()){
+                closest = warehouseData.findNextClosestGoods(startCoordinates, allGoods);
+            }
             if(closest == null){
                 System.out.println("V systemu neni dostatek zbozi z objednavky pro " + order.getId() +"!");
                 break;
@@ -345,19 +350,61 @@ public class Controller {
             storeGoodsStops.add(closest);
             //je tu vse co chceme -> smazat ze seznamu
             if(closest.getItemsCount() >= allGoods.get(closest.getName())){
+                //dokud je pocet co chceme vetsi nez 0
+                while(allGoods.get(closest.getName()) > 0){
+                    usedCapacity += closest.getItemWeight();
+                    //zbozi se nevleze do voziku
+                    if(usedCapacity > trolley.getCapacity()){
+                        //zbozi nedat do voziku
+                        System.out.println("Zbozi se nevleze do voziku 1");
+                        usedCapacity -= closest.getItemWeight();
+                        allGoods.clear();
+                        break;
+
+                    }else{//zbozi se vleze do voziku
+                        closest.setItemsCount(closest.getItemsCount() - 1);
+                        closest.setReadyToDispatch(closest.getReadyToDispatch() + 1);
+                    }
+
+                    //zmena seznamu zbozi -1
+                    allGoods.replace(closest.getName(), allGoods.get(closest.getName()) - 1);
+                }
                 //pricist vahu
-                trolley.setUsedCapacityCount(trolley.getUsedCapacityCount() + allGoods.get(closest.getName())*closest.getItemWeight());
+                //trolley.setUsedCapacityCount(trolley.getUsedCapacityCount() + allGoods.get(closest.getName())*closest.getItemWeight());
                 //odecist co jsme vzali
-                closest.setItemsCount(closest.getItemsCount() - allGoods.get(closest.getName()));
-                closest.setReadyToDispatch(closest.getReadyToDispatch() + allGoods.get(closest.getName()));
-                allGoods.remove(closest.getName());
+                //closest.setItemsCount(closest.getItemsCount() - allGoods.get(closest.getName()));
+                //closest.setReadyToDispatch(closest.getReadyToDispatch() + allGoods.get(closest.getName()));
+
+                //vse je ve voziku -> vymazat ze seznamu
+                if(!allGoods.isEmpty()){
+                    allGoods.remove(closest.getName());
+                }
+
+
             }else{ //neni vse co chceme -> vezmeme co muzem a nastavime na 0 -> v listu zustane zbytek co musime hledat jinde
                 //pricist vahu
-                trolley.setUsedCapacityCount(trolley.getUsedCapacityCount() + allGoods.get(closest.getName())*closest.getItemWeight());
                 int countLeft = allGoods.get(closest.getName())- closest.getItemsCount();
-                closest.setReadyToDispatch(closest.getItemsCount() + closest.getReadyToDispatch());
-                allGoods.replace(closest.getName(), countLeft);
-                closest.setItemsCount(0);
+                while(allGoods.get(closest.getName()) > countLeft){
+                    usedCapacity += closest.getItemWeight();
+                    //zbozi se nevleze do voziku
+                    if(usedCapacity > trolley.getCapacity()){
+                        //zbozi nedat do voziku
+                        System.out.println("Zbozi se nevleze do voziku 2");
+                        usedCapacity -= closest.getItemWeight();
+                        allGoods.clear();
+                        break;
+                    }else{//zbozi se vleze do voziku
+                        closest.setItemsCount(closest.getItemsCount() - 1);
+                        closest.setReadyToDispatch(closest.getReadyToDispatch() + 1);
+                    }
+                    //zmena seznamu zbozi -1
+                    allGoods.replace(closest.getName(), allGoods.get(closest.getName()) - 1);
+                }
+                //allGoods.clear();
+                //trolley.setUsedCapacityCount(trolley.getUsedCapacityCount() + closest.getItemsCount()*closest.getItemWeight());
+                //closest.setReadyToDispatch(closest.getItemsCount() + closest.getReadyToDispatch());
+                //allGoods.replace(closest.getName(), countLeft);
+                //closest.setItemsCount(0);
             }
 
             //hledat odkud jsem ted
@@ -406,8 +453,8 @@ public class Controller {
 
         }
 
+        //way  back home
         listCoords.add(new Coordinates(startCoordinates.getX(), warehouseData.getDropSpot().getCoordinates().getY()));
-        //listCoords.add(new Coordinates(520, 250));
         listCoords.add(warehouseData.getDropSpot().getCoordinates());
         trolley.setStoreGoodsStops(storeGoodsStops);
         System.out.println(trolley.getUsedCapacityCount());
@@ -420,7 +467,17 @@ public class Controller {
             @Override
             public void run() {
                 for(Trolley trolley: warehouseData.getTrolleys()) {
-                    Platform.runLater(()->trolley.updateCoords());
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            if(trolley.updateCoords()){
+                                List<Coordinates> path = calculatePath(trolley.getOrder(), trolley);
+                                trolley.setPath(path);
+                                trolley.setWholePath();
+                            }
+                        }
+                    });
+                    //Platform.runLater(()->trolley.updateCoords());
                 }
             }
         }, 0, 100/simulationSpeed);
@@ -439,7 +496,6 @@ public class Controller {
                             List<Coordinates> path = calculatePath(order, trolley);
                             Platform.runLater(()->trolley.setPath(path));
                             Platform.runLater(()->trolley.setWholePath());
-                            //Platform.runLater(()->trolley.setStoreGoodsStops(storeGoodsStops));
                         }
                     }
                 }
