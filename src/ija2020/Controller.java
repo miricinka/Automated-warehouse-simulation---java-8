@@ -55,12 +55,19 @@ public class Controller {
         this.warehouseData = warehouseData;
     }
 
+    /**
+     * Sets list of avaiable goods
+     */
     public void setAllGoodsList(){
         allGoodsList = new ArrayList<>();
         warehouseData.setGoodsList();
         allGoodsList = warehouseData.getGoodsList();
     }
 
+    /**
+     * Removes last painted things
+     * Used when user clicks on something else
+     */
     public void removeLastClickedStuff(){
         if(paintedPath != null){
             for(Line line:paintedPath){
@@ -312,9 +319,12 @@ public class Controller {
         mainPane.setScaleY(zoomScale * mainPane.getScaleY());
     }
 
+    /**
+     * Stops running trolley
+     */
     @FXML
     public void stopButtonClicked(){
-        if(stopClicked == true){
+        if(stopClicked){
             return;
         }
         timer.cancel();
@@ -322,9 +332,12 @@ public class Controller {
         playClicked = false;
     }
 
+    /**
+     * Trolley starts running
+     */
     @FXML
     public void playButtonClicked(){
-        if(playClicked == true){
+        if(playClicked){
             return;
         }
         simulationTime();
@@ -332,6 +345,9 @@ public class Controller {
         stopClicked = false;
     }
 
+    /**
+     * Returns simulation to begin state
+     */
     @FXML
     public void replayButtonClicked() throws IOException {
         YAMLFactory yaml_factory = new YAMLFactory();
@@ -344,14 +360,18 @@ public class Controller {
         paintTrolleys();
         setAllGoodsList();
         playButtonClicked();
-
     }
 
-
+    /**
+     * Setups speed to 1
+     */
     public void setupSpeed(){
         simulationSpeed = 1;
     }
 
+    /**
+     * changes speed based on slider
+     */
     public void changeSpeed(){
         simulationSpeed = (long) speedSlider.getValue() * 3;
         timer.cancel();
@@ -361,6 +381,10 @@ public class Controller {
         }
     }
 
+    /**
+     * Calculates path for trolley to finish its order
+     * if max capacity is filled, return to dropspot
+     */
     public List<Coordinates> calculatePath(Order order, Trolley trolley){
         double usedCapacity = 0.0;
         //trolley.setUsedCapacityCount(0.0);
@@ -409,11 +433,6 @@ public class Controller {
                     //zmena seznamu zbozi -1
                     allGoods.replace(closest.getName(), allGoods.get(closest.getName()) - 1);
                 }
-                //pricist vahu
-                //trolley.setUsedCapacityCount(trolley.getUsedCapacityCount() + allGoods.get(closest.getName())*closest.getItemWeight());
-                //odecist co jsme vzali
-                //closest.setItemsCount(closest.getItemsCount() - allGoods.get(closest.getName()));
-                //closest.setReadyToDispatch(closest.getReadyToDispatch() + allGoods.get(closest.getName()));
 
                 //vse je ve voziku -> vymazat ze seznamu
                 if(!allGoods.isEmpty()){
@@ -440,11 +459,6 @@ public class Controller {
                     //zmena seznamu zbozi -1
                     allGoods.replace(closest.getName(), allGoods.get(closest.getName()) - 1);
                 }
-                //allGoods.clear();
-                //trolley.setUsedCapacityCount(trolley.getUsedCapacityCount() + closest.getItemsCount()*closest.getItemWeight());
-                //closest.setReadyToDispatch(closest.getItemsCount() + closest.getReadyToDispatch());
-                //allGoods.replace(closest.getName(), countLeft);
-                //closest.setItemsCount(0);
             }
 
             //hledat odkud jsem ted
@@ -500,6 +514,9 @@ public class Controller {
         return listCoords;
     }
 
+    /**
+     * Creates simulation time and start running trolleys, calculates path for trolley if he didnt finish his order because of capacity
+     */
     public void simulationTime() {
         timer = new Timer(false);
         timer.scheduleAtFixedRate(new TimerTask() {
@@ -522,6 +539,9 @@ public class Controller {
         }, 0, 100/simulationSpeed);
     }
 
+    /**
+     * Every 3 seconds checks if there are orders and trolleys -> gives order to trolley
+     */
     public void checkForOrder() {
         timer2 = new Timer(false);
         timer2.scheduleAtFixedRate(new TimerTask() {
