@@ -98,15 +98,22 @@ public class Isle {
         this.storeGoodsList = storeGoodsList;
     }
 
+    /**
+     * Sets list of goods on isle
+     * @return cost of this isle
+     */
     public double getCost() {
         return cost;
     }
 
+    /**
+     * Sets costs of this isle
+     */
     public void setCost() {
         this.cost = calculateIsleCost();
     }
 
-    public double calculateIsleCost(){
+    private double calculateIsleCost(){
         if(start.getX() == end.getX()){
             return abs(start.getY() - end.getY());
         }else{

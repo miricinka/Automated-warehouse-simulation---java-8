@@ -20,6 +20,10 @@ public class NewOrderController {
 
     private WarehouseData warehouseData;
 
+    /**
+     * Loads goods to listView
+     * @param name of goods
+     */
     public void loadOrderList(String name){
         Label label1 = new Label(name);
         label1.setMinWidth(70);
@@ -30,10 +34,20 @@ public class NewOrderController {
         orderList.getItems().add(hb);
     }
 
+    /**
+     * Sets warehouse data
+     * @param warehouseData
+     */
     public void setWarehouseData(WarehouseData warehouseData) {
         this.warehouseData = warehouseData;
     }
 
+    /**
+     * Reacts on save button click
+     * creates and saves new order
+     * if order ID is missing or no goods wanted, new order is not created
+     * closes the NewOrder window
+     */
     public void saveButtonClicked() {
 
         HashMap<String, Integer> toDoList= new HashMap<>();

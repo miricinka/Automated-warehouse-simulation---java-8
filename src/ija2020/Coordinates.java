@@ -52,6 +52,10 @@ public class Coordinates {
         this.y = y;
     }
 
+    /**
+     * Calculates distanes between this and other coordinates
+     * @param coordinates
+     */
     public double calcDistance(Coordinates coordinates){
         return Math.sqrt((x-coordinates.getX())*(x-coordinates.getX()) + (y-coordinates.getY())*(y-coordinates.getY()));
     }

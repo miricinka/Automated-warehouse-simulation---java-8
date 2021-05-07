@@ -15,7 +15,6 @@ public class Trolley {
     private String id;
     private double capacity; //kg
     private double usedCapacity = 0.0;
-    private double usedCapacityCount;
     private Order order;
     private Coordinates coordinates;
     private Coordinates startCoordinates;
@@ -34,18 +33,34 @@ public class Trolley {
         order = null;
     }
 
+    /**
+     * Gets ID of trolley
+     * @return id of trolley
+     */
     public String getId() {
         return id;
     }
 
+    /**
+     * Sets ID of trolley
+     * @param ID of trolley
+     */
     public void setID(String ID) {
         this.id = ID;
     }
 
+    /**
+     * returns list of store goods where this trolley stops on its way to get all Goods
+     * @return list of storeGoods
+     */
     public List<StoreGoods> getStoreGoodsStops() {
         return storeGoodsStops;
     }
 
+    /**
+     * Sets list of  store goods where this trolley stops on its way to get all Goods
+     * @param storeGoodsStops of storeGoods
+     */
     public void setStoreGoodsStops(List<StoreGoods> storeGoodsStops) {
         this.storeGoodsStops = storeGoodsStops;
     }
@@ -82,14 +97,6 @@ public class Trolley {
         this.usedCapacity = usedCapacity;
     }
 
-    public double getUsedCapacityCount() {
-        return usedCapacityCount;
-    }
-
-    public void setUsedCapacityCount(double usedCapacityCount) {
-        this.usedCapacityCount = usedCapacityCount;
-    }
-
     /**
      * Gets current order of trolley
      * @return current order of trolley
@@ -106,10 +113,18 @@ public class Trolley {
         this.order = order;
     }
 
+    /**
+     * Gets start coordinates of trolley
+     * @return start coordinates of trolley
+     */
     public Coordinates getStartCoordinates() {
         return startCoordinates;
     }
 
+    /**
+     * Sets start coordinates of trolley
+     * @param startCoordinates of trolley
+     */
     public void setStartCoordinates(Coordinates startCoordinates) {
         this.startCoordinates = startCoordinates;
     }
@@ -130,36 +145,60 @@ public class Trolley {
         this.coordinates = coordinates;
     }
 
+    /**
+     * Sets path of trolley
+     * @param path list of coordinates
+     */
     public void setPath(List<Coordinates> path){
         this.path = path;
     }
 
+    /**
+     * Gets path of trolley
+     * @return path of trolley
+     */
     public List<Coordinates> getPath(){
         return path;
     }
 
+    /**
+     * Creates copy of path for painting path -> from real path are coordinates taken
+     */
     public void setWholePath(){
         wholePath = new ArrayList<>(path);
     }
 
+    /**
+     * Gets whole path of trolley
+     * @return whole path of trolley
+     */
     public List<Coordinates> getWholePath(){
         return wholePath;
     }
 
+    /**
+     * Gets first coordinate in whole path
+     * @return coordinate first coordinate in whole path
+     */
     public Coordinates getWholePathFirst(){
         return wholePath.get(0);
     }
 
+    /**
+     * Sets reference to circle the trolley belongs to
+     * @param circle created and painted circle
+     */
     public void addCircle(Circle circle){
         this.circle = circle;
     }
 
-
-    public boolean isGoodsStop(Coordinates coordinates){
-
-        return false;
-    }
-
+    /**
+     * Updates coordinates on map according to path
+     * when trolley is on a stop, sleeps for few seconds
+     * when trolley stops and takes goods, info is updated
+     * removes stop from path
+     * @return boolean true if there are some items left to do
+     */
     public boolean updateCoords() {
         if(sleep > 0){
             sleep--;
@@ -172,6 +211,7 @@ public class Trolley {
             return false;
         }
         //dojel na konec cesty -> splnil objednavku
+        //nastaveni defaultnich hodnot
         if(path.isEmpty()){
             usedCapacity = 0.0;
             storeGoodsStops = null;
@@ -189,7 +229,7 @@ public class Trolley {
             //podivat se jestli jsme u zastavky kde vyzvedavame zbozi
             for(StoreGoods store :storeGoodsStops){
                 if(store.getStopCoordinates().equals(wayToGo)){
-                    //jsme u zbozi
+                    //jsme u zbozi -> update informaci
                     int countToDo = order.getToDoList().get(store.getName());
 
                     if(order.getDoneList() == null) {
@@ -230,11 +270,12 @@ public class Trolley {
 
                     //zastavit se
                     sleep = 20;
-
                 }
             }
             path.remove(0);
             return false;
+
+        //pohyb dal
         } else if(wayToGo.getX() == coordinates.getX()) {
             if(wayToGo.getY() > coordinates.getY()) {
                 coordinates.setY(coordinates.getY() + 1.0);

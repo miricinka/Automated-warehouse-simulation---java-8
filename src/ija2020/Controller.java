@@ -1,5 +1,7 @@
 package ija2020;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -17,6 +19,7 @@ import javafx.scene.shape.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
@@ -80,9 +83,8 @@ public class Controller {
     /**
      * Paints all Isles and Goods from warehouseData
      * Shows info on mouse entered and exited
-     * @param root of borderpane
      */
-    public void paintIsles(BorderPane root) {
+    public void paintIsles() {
 
         Text storeGoodsInfo = new Text(10, 20, "");
 
@@ -90,7 +92,7 @@ public class Controller {
             //spocitani ceny ulicky
             isle.setCost();
             Line line = new Line(isle.getStart().getX(), isle.getStart().getY(), isle.getEnd().getX(), isle.getEnd().getY());
-            line.setStrokeWidth(4);
+            line.setStrokeWidth(6);
             line.setStroke(SLATEGRAY);
             mainPane.getChildren().add(line);
 
@@ -100,12 +102,12 @@ public class Controller {
                     if(isle.getClosed()){
                         isle.setOpen();
                         line.setStroke(SLATEGRAY);
-                        System.out.println("Otevreni ulicky");
+                        System.out.println("Otevreni ulicky" + isle);
 
                     }else{
                         isle.setClosed();
                         line.setStroke(RED);
-                        System.out.println("Uzavreni ulicky");
+                        System.out.println("Uzavreni ulicky" + isle);
                     }
                     //System.out.println("Ulicka" + isle);
                 }
@@ -140,9 +142,8 @@ public class Controller {
     /**
      * Paints all Trolleys from warehouseData
      * Shows info on mouse entered and exited
-     * @param root of borderpane
      */
-    public void paintTrolleys(BorderPane root) {
+    public void paintTrolleys() {
 
         Text trolleyInfo = new Text(10, 20, "");
 
@@ -260,6 +261,9 @@ public class Controller {
         info.setText(trolleyString+textToView);
     }
 
+    /**
+     * On button Add new Order clicked creates new window with listview where user can add new order
+     */
     @FXML
     public void btn2Clicked() {
         removeLastClickedStuff();
@@ -286,6 +290,9 @@ public class Controller {
         stage.show();
     }
 
+    /**
+     * On scroll zooms main pane with warehouse
+     */
     @FXML
     public void zoom(ScrollEvent event) {
         double scroll = event.getDeltaY();
@@ -325,13 +332,28 @@ public class Controller {
         stopClicked = false;
     }
 
+    @FXML
+    public void replayButtonClicked() throws IOException {
+        YAMLFactory yaml_factory = new YAMLFactory();
+        ObjectMapper obj_mapper = new ObjectMapper(yaml_factory);
+        WarehouseData warehouseData = obj_mapper.readValue(new File("data/dropspot4.yml"), WarehouseData.class);
+        stopButtonClicked();
+        mainPane.getChildren().clear();
+        this.warehouseData = warehouseData;
+        paintIsles();
+        paintTrolleys();
+        setAllGoodsList();
+        playButtonClicked();
+
+    }
+
 
     public void setupSpeed(){
         simulationSpeed = 1;
     }
 
     public void changeSpeed(){
-        simulationSpeed = (long) speedSlider.getValue();
+        simulationSpeed = (long) speedSlider.getValue() * 3;
         timer.cancel();
         simulationTime();
         if(stopClicked == true){
@@ -475,7 +497,6 @@ public class Controller {
         listCoords.add(new Coordinates(startCoordinates.getX(), warehouseData.getDropSpot().getCoordinates().getY()));
         listCoords.add(warehouseData.getDropSpot().getCoordinates());
         trolley.setStoreGoodsStops(storeGoodsStops);
-        System.out.println(trolley.getUsedCapacityCount());
         return listCoords;
     }
 

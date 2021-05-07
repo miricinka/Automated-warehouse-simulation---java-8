@@ -85,6 +85,10 @@ public class WarehouseData {
         return orders;
     }
 
+    /**
+     * Returns next order in system
+     * @return next order in system
+     */
     public Order takeNextOrder(){
         if (orders.size() != 0){
             return orders.pollFirst();
@@ -100,6 +104,9 @@ public class WarehouseData {
         this.orders = orders;
     }
 
+    /**
+     * creates list of available goods (sorted)
+     */
     public void setGoodsList() {
         goodsList = new ArrayList<>();
         for (Isle isle : this.getIsles()){
@@ -107,8 +114,6 @@ public class WarehouseData {
                 for (StoreGoods storeGoods : isle.getStoreGoodsList()) {
                     String name = storeGoods.getName();
                     if(storeGoods.getItemsCount() == 0){
-                        //System.out.println(name);
-                        //System.out.println(goodsList);
                         continue;
                     }
                     if(!goodsList.contains(name)){
@@ -120,14 +125,27 @@ public class WarehouseData {
         java.util.Collections.sort(goodsList);
     }
 
+    /**
+     * Returns list of available goods
+     * @return list of available goods
+     */
     public ArrayList<String> getGoodsList() {
         return goodsList;
     }
 
+    /**
+     * Adds new order to system
+     * @param order we want to add to system
+     */
     public void addOrder(Order order) {
         orders.add(order);
     }
 
+    /**
+     * Finds goods in warehouse by name and returns it
+     * @param goodsName name of goods we want to find
+     * @return goods or null if count == 0 or is on a closed isle
+     */
     public StoreGoods findGoods(String goodsName){
         for(Isle isle: isles){
             if(!isle.getClosed()){ //pokud neni zavrena
@@ -145,6 +163,12 @@ public class WarehouseData {
         return null;
     }
 
+    /**
+     * From map of goods returns the closest one based on coordinates
+     * @param coordinates from where we find closest
+     * @param allGoods map of goods
+     * @return closest StoreGoods or null
+     */
     public StoreGoods findNextClosestGoods(Coordinates coordinates, HashMap<String, Integer> allGoods){
         double shortestDistance = 1000000000;
         StoreGoods closest = null;

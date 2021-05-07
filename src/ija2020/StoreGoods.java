@@ -110,18 +110,34 @@ public class StoreGoods {
         this.stopCoordinates = stopCoordinates;
     }
 
+    /**
+     * Returns count of items in this StoreGoods
+     * @return count of items in this StoreGoods
+     */
     public int getItemsCount() {
         return itemsCount;
     }
 
+    /**
+     * Sets count of items in this StoreGoods
+     * @param itemsCount count of items
+     */
     public void setItemsCount(int itemsCount) {
         this.itemsCount = itemsCount;
     }
 
+    /**
+     * Returns count of items ready to Dispatch in this StoreGoods
+     * @return count of items ready to Dispatch
+     */
     public int getReadyToDispatch() {
         return readyToDispatch;
     }
 
+    /**
+     * Sets count of items ready to dispatch in this StoreGoods
+     * @param readyToDispatch count of items
+     */
     public void setReadyToDispatch(int readyToDispatch) {
         this.readyToDispatch = readyToDispatch;
     }
