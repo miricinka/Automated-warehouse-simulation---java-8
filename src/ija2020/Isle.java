@@ -69,11 +69,17 @@ public class Isle {
     }
 
     /**
-     * Sets if isle is closed or not
-     * @param closed boolean
+     * Closes the isle
      */
-    public void setClosed(Boolean closed) {
-        this.closed = closed;
+    public void setClosed() {
+        this.closed = true;
+    }
+
+    /**
+     * Opens the isle
+     */
+    public void setOpen() {
+        this.closed = false;
     }
 
     /**

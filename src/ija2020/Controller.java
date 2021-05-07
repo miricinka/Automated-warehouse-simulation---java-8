@@ -93,6 +93,24 @@ public class Controller {
             line.setStrokeWidth(4);
             line.setStroke(SLATEGRAY);
             mainPane.getChildren().add(line);
+
+            line.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    if(isle.getClosed()){
+                        isle.setOpen();
+                        line.setStroke(SLATEGRAY);
+                        System.out.println("Otevreni ulicky");
+
+                    }else{
+                        isle.setClosed();
+                        line.setStroke(RED);
+                        System.out.println("Uzavreni ulicky");
+                    }
+                    //System.out.println("Ulicka" + isle);
+                }
+            });
+
             if (isle.getStoreGoodsList() != null) {
                 for (StoreGoods storeGoods : isle.getStoreGoodsList()) {
                     //store goods vi na ktere je isle
