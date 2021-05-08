@@ -11,6 +11,38 @@ trolleys:
     startCoordinates:
       x: 520.00
       y: 250.00
+  - &Trolley02
+    id: 02
+    capacity: 100.0
+    usedCapacity: 0.0
+    order: null
+    startCoordinates:
+      x: 520.00
+      y: 250.00
+  - &Trolley03
+    id: 03
+    capacity: 100.0
+    usedCapacity: 0.0
+    order: null
+    startCoordinates:
+      x: 520.00
+      y: 250.00
+  - &Trolley04
+    id: 04
+    capacity: 200.0
+    usedCapacity: 0.0
+    order: null
+    startCoordinates:
+      x: 520.00
+      y: 250.00
+  - &Trolley05
+    id: 05
+    capacity: 150.0
+    usedCapacity: 0.0
+    order: null
+    startCoordinates:
+      x: 520.00
+      y: 250.00
 isles:
   - &Isle1
     start:
@@ -1896,10 +1928,57 @@ isles:
       y: 250.0
 orders:
   - &Order01
-    id: Mirinka
+    id: Alice Vlasatá
     toDoList:
       Ananas: 5
       Avokádo: 5
       Brambora: 5
       Celer: 5
       Slon: 2
+      Izolepa: 3
+      Pavouk: 1
+      Propiska: 4
+  - &Order02
+    id: Martin Buchta
+    toDoList:
+      Rajče: 7
+      Roleta: 1
+      Sporák: 2
+      Zrcadlo: 1
+      Vysavač: 1
+      Tygr: 1
+      Router: 10
+      PC: 1
+  - &Order03
+    id: Edvard Secret
+    toDoList:
+      Had: 10
+      Forma: 1
+      Hruška: 5
+      Hrnek: 10
+      Lednice: 1
+      Tygr: 1
+      Router: 10
+      Jablko: 20
+  - &Order04
+    id: Dame Jidlo
+    toDoList:
+      Avokádo: 10
+      Meloun: 3
+      Rajče: 5
+      Pomeranč: 3
+      Jahoda: 4
+      Celer: 4
+      Brambora: 10
+      Lednice: 1
+  - &Order05
+    id: Mame radi zvirata
+    toDoList:
+      Slon: 10
+      Tygr: 2
+      Morče: 5
+      Křeček: 3
+      Kočka: 4
+      Had: 2
+      Papoušek: 5
+      Pes: 1
