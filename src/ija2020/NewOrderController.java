@@ -1,7 +1,10 @@
 package ija2020;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import java.util.HashMap;
@@ -17,19 +20,16 @@ public class NewOrderController {
 
     private WarehouseData warehouseData;
 
-        Label label1 = new Label(name);
     /**
      * Loads goods to listView
      * @param name of goods
      */
-    public void loadOrderList(String name, int count){
-        Label label2 = new Label(String.valueOf(count));
+    public void loadOrderList(String name){
+        Label label1 = new Label(name);
         label1.setMinWidth(70);
-        label2.setMinWidth(70);
-
         TextField textField = new TextField ("0");
         HBox hb = new HBox();
-        hb.getChildren().addAll(label1, textField, label2);
+        hb.getChildren().addAll(label1, textField);
         hb.setSpacing(10);
         orderList.getItems().add(hb);
     }
@@ -58,23 +58,14 @@ public class NewOrderController {
             if (each instanceof HBox) {
                 HBox eachBox = (HBox) each;
                 Label label = (Label) eachBox.getChildren().get(0);
-                Label label2 = (Label) eachBox.getChildren().get(2);
-
-                int maxCount = Integer.parseInt(label2.getText());
                 String goodsName = label.getText();
                 TextField textField = (TextField) eachBox.getChildren().get(1);
                 String goodsCount = textField.getText();
                 //convert string to integer
                 try {
                     int goodsCountInt = Integer.parseInt(goodsCount.trim());
-                    if(goodsCountInt > 0 && goodsCountInt <= maxCount) {
+                    if(goodsCountInt > 0) {
                         toDoList.put(goodsName, goodsCountInt);
-                    }
-                    if (goodsCountInt > maxCount){
-                        Alert alert = new Alert(Alert.AlertType.ERROR);
-                        alert.setContentText("Neplatná hodnota");
-                        alert.show();
-
                     }
                 } catch (NumberFormatException nfe) {
                     System.out.println("NumberFormatException: " + nfe.getMessage());

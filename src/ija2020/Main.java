@@ -46,8 +46,6 @@ public class Main extends Application {
         controller.setAllGoodsList();
 
         //setup speed
-        controller.paintTrolleys(root);
-        controller.setAllGoodsList();
         controller.setupSpeed();
 
         //run simulation
@@ -55,7 +53,6 @@ public class Main extends Application {
         controller.checkForOrder();
 
         primaryStage.show();
-
 
     }
 

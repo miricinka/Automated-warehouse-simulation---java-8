@@ -23,7 +23,6 @@ public class Trolley {
     private Circle circle;
     private List<StoreGoods> storeGoodsStops;
     private int sleep = 0;
-    private boolean updateInfoPanel = false;
 
     public Trolley() {}
 
@@ -193,15 +192,6 @@ public class Trolley {
         this.circle = circle;
     }
 
-    public Circle circulusMaximus(){
-        return circle;
-    }
-
-    public boolean isGoodsStop(Coordinates coordinates){
-
-        return false;
-    }
-    
     /**
      * Updates coordinates on map according to path
      * when trolley is on a stop, sleeps for few seconds
@@ -209,24 +199,16 @@ public class Trolley {
      * removes stop from path
      * @return boolean true if there are some items left to do
      */
-    public int updateCoords() {
-        if (updateInfoPanel){
-            updateInfoPanel = false;
-            sleep--;
-            return 2;
-        }
-
-
+    public boolean updateCoords() {
         if(sleep > 0){
             sleep--;
-            return 0;
+            return false;
         }
-
         if(coordinates == null) {
             coordinates = new Coordinates(startCoordinates.getX(), startCoordinates.getY());
         }
         if(path == null) {
-            return 0;
+            return false;
         }
         //dojel na konec cesty -> splnil objednavku
         //nastaveni defaultnich hodnot
@@ -235,10 +217,10 @@ public class Trolley {
             storeGoodsStops = null;
             path = null;
             if(!order.getToDoList().isEmpty()){
-                return 1;
+                return true;
             }
             order = null;
-            return 0;
+            return false;
         }
         Coordinates wayToGo = path.get(0);
         //jsme na krizovatce/u zbozi
@@ -247,8 +229,7 @@ public class Trolley {
             //podivat se jestli jsme u zastavky kde vyzvedavame zbozi
             for(StoreGoods store :storeGoodsStops){
                 if(store.getStopCoordinates().equals(wayToGo)){
-                    //jsme u zbozi
-                    System.out.println( order.getToDoList());
+                    //jsme u zbozi -> update informaci
                     int countToDo = order.getToDoList().get(store.getName());
 
                     if(order.getDoneList() == null) {
@@ -289,11 +270,12 @@ public class Trolley {
 
                     //zastavit se
                     sleep = 20;
-                    updateInfoPanel = true;
                 }
             }
             path.remove(0);
-            return 0;
+            return false;
+
+        //pohyb dal
         } else if(wayToGo.getX() == coordinates.getX()) {
             if(wayToGo.getY() > coordinates.getY()) {
                 coordinates.setY(coordinates.getY() + 1.0);
@@ -311,7 +293,7 @@ public class Trolley {
         circle.setCenterX(coordinates.getX());
         circle.setCenterY(coordinates.getY());
 
-        return 0;
+        return false;
     }
 
 
