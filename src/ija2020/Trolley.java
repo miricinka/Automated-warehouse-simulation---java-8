@@ -24,6 +24,7 @@ public class Trolley {
     private Circle circle;
     private List<StoreGoods> storeGoodsStops;
     private int sleep = 0;
+    private boolean updateInfoPanel = false;
 
     public Trolley() {}
 
@@ -154,22 +155,32 @@ public class Trolley {
         this.circle = circle;
     }
 
+    public Circle circulusMaximus(){
+        return circle;
+    }
 
     public boolean isGoodsStop(Coordinates coordinates){
 
         return false;
     }
 
-    public boolean updateCoords() {
+    public int updateCoords() {
+        if (updateInfoPanel){
+            updateInfoPanel = false;
+            sleep--;
+            return 2;
+        }
+
         if(sleep > 0){
             sleep--;
-            return false;
+            return 0;
         }
+
         if(coordinates == null) {
             coordinates = new Coordinates(startCoordinates.getX(), startCoordinates.getY());
         }
         if(path == null) {
-            return false;
+            return 0;
         }
         //dojel na konec cesty -> splnil objednavku
         if(path.isEmpty()){
@@ -177,10 +188,10 @@ public class Trolley {
             storeGoodsStops = null;
             path = null;
             if(!order.getToDoList().isEmpty()){
-                return true;
+                return 1;
             }
             order = null;
-            return false;
+            return 0;
         }
         Coordinates wayToGo = path.get(0);
         //jsme na krizovatce/u zbozi
@@ -190,6 +201,7 @@ public class Trolley {
             for(StoreGoods store :storeGoodsStops){
                 if(store.getStopCoordinates().equals(wayToGo)){
                     //jsme u zbozi
+                    System.out.println( order.getToDoList());
                     int countToDo = order.getToDoList().get(store.getName());
 
                     if(order.getDoneList() == null) {
@@ -230,11 +242,11 @@ public class Trolley {
 
                     //zastavit se
                     sleep = 20;
-
+                    updateInfoPanel = true;
                 }
             }
             path.remove(0);
-            return false;
+            return 0;
         } else if(wayToGo.getX() == coordinates.getX()) {
             if(wayToGo.getY() > coordinates.getY()) {
                 coordinates.setY(coordinates.getY() + 1.0);
@@ -252,7 +264,7 @@ public class Trolley {
         circle.setCenterX(coordinates.getX());
         circle.setCenterY(coordinates.getY());
 
-        return false;
+        return 0;
     }
 
 
