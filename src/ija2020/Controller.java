@@ -523,11 +523,11 @@ public class Controller {
 
 
             while (!nextStopIsle.getStart().equals(startCoordinates) && !nextStopIsle.getEnd().equals(startCoordinates)){
-                System.out.println("Current coordinate: " + startCoordinates); //TODO delete me
-                System.out.println("Open: " + open + " End of open"); //TODO delete me
-                System.out.println("Closed: " + closed + " End of closed"); //TODO delete me
+                System.out.println("Current coordinate: " + startCoordinates);
+                System.out.println("Open: " + open + " End of open");
+                System.out.println("Closed: " + closed + " End of closed");
 
-                // skip if we are at the isle of the searched coordinates
+                // break if we are at the isle of the searched coordinates
                 if (nextStopIsle.equals(warehouseData.getIsleFromCoords(startCoordinates).get(0))){
                     break;
                 }
@@ -536,15 +536,10 @@ public class Controller {
                 for (Isle neighborIsle:possibleNextIsles) {
                     Coordinates possibleNextCoordinate;
 
-
                     // Ignore closed isles
                     if(neighborIsle.getClosed()){
                         System.out.println("Ignoruju ulicku " + neighborIsle + " protoze je zavrena.");
                         continue;
-                    }
-
-                    if (closed.isEmpty()){
-                        double distanceStart = neighborIsle.getStart().calcDistance(nextCoordinates) + neighborIsle.getCost();
                     }
 
                     // find new coordinate
@@ -553,6 +548,7 @@ public class Controller {
                     }else if(neighborIsle.getEnd().equals(startCoordinates)) {
                         possibleNextCoordinate = neighborIsle.getStart();
                     }else {
+                        // path is starting inside an isle, add both Isle coordinates as segments
                         double distanceStart = neighborIsle.getStart().calcDistance(nextCoordinates);
                         double distanceEnd = neighborIsle.getEnd().calcDistance(nextCoordinates);
                         open.addCoordinateSegment(startCoordinates, neighborIsle.getStart(), distanceStart);
@@ -569,27 +565,25 @@ public class Controller {
                     double distance = possibleNextCoordinate.calcDistance(nextCoordinates) + neighborIsle.getCost();
                     open.addCoordinateSegment(startCoordinates, possibleNextCoordinate, distance);
 
-                    if(open.isEmpty()){
-                        System.out.println("No valid path - list Open is empty!"); //TODO edit me
-                    }
-                }
+                }// end of adding new path segments from new coordinate
 
-
+                // get closestPath segment, move it from open to closed
                 PathSegment closestPathSegment = open.getLowestCostPathSegment();
-
                 if(!closed.isPathSegmentInPath(closestPathSegment)) {
                     closed.addPathSegment(closestPathSegment);
                 }
-
                 open.removeSegment(closestPathSegment);
 
+                // load coordinates and next isles from the new segment
                 startCoordinates = closestPathSegment.getEnd();
                 possibleNextIsles = warehouseData.getIsleFromCoords(startCoordinates);
-            }
+            } // end of Path between two goods or a good and the start coordinate
+
+            //add segment of next stop
             closed.addCoordinateSegment(startCoordinates, nextCoordinates, 1);
             startCoordinates = nextCoordinates;
 
-
+            // remove duplicate coordinates from closed
             for (Coordinates coordinate: closed.backtrackPath(startCoordinates, coordinate1)){
                 if (orderPath.isEmpty()){
                     orderPath.add(coordinate);
@@ -600,12 +594,12 @@ public class Controller {
                 }
 
             }
-//            orderPath.addAll(closed.backtrackPath(startCoordinates, coordinate1));
+
+            // reset open and closed
             open = new Path();
             closed = new Path();
-        }
+        } //end of order
 
-        //way  back home
         trolley.setStoreGoodsStops(storeGoodsStops);
         System.out.println("Backtrack path is" + orderPath);
         return orderPath;

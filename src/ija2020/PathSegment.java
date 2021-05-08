@@ -21,10 +21,22 @@ public class PathSegment {
         this.cost = cost;
     }
 
+    /**
+     * Returns start coordinate
+     * @return segment start coordinate
+     */
     public Coordinates getStart() {return start; }
 
+    /**
+     * Returns end coordinate
+     * @return segment enf coordinate
+     */
     public Coordinates getEnd() {return end; }
 
+    /**
+     * Returns cost
+     * @return cost
+     */
     public double getCost() { return cost; }
 
     @Override
