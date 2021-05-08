@@ -104,6 +104,16 @@ public class WarehouseData {
         this.orders = orders;
     }
 
+    public List<StoreGoods> getGoodsStoredList(){
+        List<StoreGoods> storeGoodsList = new ArrayList<>();
+        for (Isle isle : this.getIsles()) {
+            if (isle.getStoreGoodsList() != null) {
+                storeGoodsList.addAll(isle.getStoreGoodsList());
+            }
+        }
+        return storeGoodsList;
+    }
+
     /**
      * creates list of available goods (sorted)
      */
