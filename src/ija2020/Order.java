@@ -69,4 +69,13 @@ public class Order {
         this.doneMap = doneList;
     }
 
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id='" + id + '\'' +
+                ", toDoMap=" + toDoMap +
+                ", doneMap=" + doneMap +
+                '}';
+    }
 }
