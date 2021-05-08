@@ -74,6 +74,7 @@ public class Controller {
         if (lastClickedTrolley != null) {
             lastClickedTrolley.setFill(RED);
         }
+        lastClickedTrolley = null;
     }
 
 
@@ -234,6 +235,8 @@ public class Controller {
      */
     @FXML
     public void btn1Clicked() {
+        removeLastClickedStuff();
+
         textPanel.getChildren().clear();
         Text info = new Text(10, 20, "");
         textPanel.getChildren().add(info);
@@ -288,9 +291,26 @@ public class Controller {
         stage.setScene(new Scene(root1));
 
         this.setAllGoodsList();
-        for(String name: allGoodsList) {
-            newOrderController.loadOrderList(name);
+
+        Map<String, Integer> superStoreMap = new HashMap<>();
+        for (String name:allGoodsList) {
+            superStoreMap.put(name, 0);
         }
+
+        for (StoreGoods storeGoods:warehouseData.getGoodsStoredList()){
+            superStoreMap.replace(storeGoods.getName(),superStoreMap.get(storeGoods.getName()),superStoreMap.get(storeGoods.getName()) + storeGoods.getItemsCount());
+        }
+
+        for (Order order:warehouseData.getOrders()){
+            for (Map.Entry<String, Integer> entry:order.getToDoList().entrySet()) {
+                superStoreMap.replace(entry.getKey(), superStoreMap.get(entry.getKey()), superStoreMap.get(entry.getKey()) - entry.getValue());
+            }
+        }
+
+        for(String name: allGoodsList) {
+            newOrderController.loadOrderList(name, superStoreMap.get(name));
+        }
+
 
         newOrderController.setWarehouseData(warehouseData);
 
@@ -556,9 +576,22 @@ public class Controller {
                                 List<Coordinates> path = calculatePath(trolley.getOrder(), trolley);
                                 trolley.setPath(path);
                                 trolley.setWholePath();
-                                updateTrolleyInfo(trolley);
+                                if (lastClickedTrolley != null){
+                                    if (lastClickedTrolley == trolley.circulusMaximus()){
+                                        updateTrolleyPath(trolley);
+                                        updateTrolleyInfo(trolley);
+                                    }
+                                }else {
+                                    btn1Clicked();
+                                }
                             }else if(result == 2){
-                                updateTrolleyInfo(trolley);
+                                if (lastClickedTrolley != null){
+                                    if (lastClickedTrolley == trolley.circulusMaximus()){
+                                        updateTrolleyInfo(trolley);
+                                    }
+                                }else {
+                                    btn1Clicked();
+                                }
                             }
                         }
                     });

@@ -40,13 +40,16 @@ public class Main extends Application {
         controller.setWarehouseData(warehouseData);
         controller.paintIsles(root);
 
+
         controller.paintTrolleys(root);
         controller.setAllGoodsList();
         controller.setupSpeed();
 
         controller.simulationTime();
         controller.checkForOrder();
+
         primaryStage.show();
+
 
     }
 
