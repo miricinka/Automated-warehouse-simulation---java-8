@@ -46,7 +46,7 @@ public class Main extends Application {
         controller.setAllGoodsList();
 
 
-        controller.paintTrolleys(root);
+        controller.paintTrolleys();
         controller.setAllGoodsList();
         //setup speed
         controller.setupSpeed();

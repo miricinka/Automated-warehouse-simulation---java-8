@@ -443,8 +443,12 @@ public class Controller {
                 nextCoordinates = orderPath.get(0);
             }else {
                 StoreGoods closest = null;
-                if (usedCapacity < trolley.getCapacity()) {
+                StoreGoods tmp = warehouseData.findNextClosestGoods(startCoordinates, allGoods);
+                if (usedCapacity + tmp.getItemWeight() <= trolley.getCapacity() ) {
                     closest = warehouseData.findNextClosestGoods(startCoordinates, allGoods);
+                }else{
+                    allGoods.clear();
+                    continue;
                 }
                 if (closest == null) {
                     System.out.println("V systemu neni dostatek zbozi z objednavky pro " + order.getId() + "!");
@@ -603,7 +607,6 @@ public class Controller {
 
         //way  back home
         trolley.setStoreGoodsStops(storeGoodsStops);
-        System.out.println(trolley.getUsedCapacityCount());
         System.out.println("Backtrack path is" + orderPath);
         return orderPath;
     }
