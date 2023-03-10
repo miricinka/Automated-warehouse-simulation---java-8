@@ -24,7 +24,7 @@ Each type of good is stored on its own shelf, with a specified weight and number
 
 Trolleys have a weight capacity, and if they cannot complete an entire order due to this limit, they will do so in multiple trips.
 
-Trolleys are intelligent and can determine the most effective path to collect all the goods. 
+Trolleys are intelligent (implemented by modified backtracking algorithm) and can determine the most effective path to collect all the goods. 
 By clicking on a specific trolley, you can view its current path, capacity, and order progress. Small red dots indicate where the trolley will stop to pick up goods.
 
 <img width="830" alt="image" src="https://user-images.githubusercontent.com/56356131/224342172-de9c0a85-5c6c-4db7-8be4-8f23444baf84.png">
@@ -50,7 +50,6 @@ The main plane is zoomable.
 
 <img width="810" alt="image" src="https://user-images.githubusercontent.com/56356131/224346942-696acf46-24dc-45a2-83ea-160f56a3d542.png">
 
-PS: please use the ThisWorks branch as we could not merge it properly to master.
 
 
 
