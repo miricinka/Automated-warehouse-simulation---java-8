@@ -3,8 +3,8 @@ Autors:
 - Martin Zovinec(xzovin00)
 
 Contribution: 
-- Mirka 90% - almost 7k lines of code
-- Martin 10%
+- Mirka 80%
+- Martin 20%
 
 ## Automated warehouse simulation in java 8.
 Simulator skladu zbozi a vydeje objednavek v Java 8.
@@ -14,7 +14,7 @@ Je potřeba nejdříve spustit skript lib/get-libs.sh.
 <img width="830" alt="image" src="https://user-images.githubusercontent.com/56356131/224340815-6b94e583-8766-4790-bce0-a763058daf81.png">
 
 
-You can load your own warehouse map file (in YAML format) into the program.
+You can load your own warehouse map file (in YAML format) into the program. [Current map file](https://github.com/miricinka/ija2021/blob/thisWorks/data/dropspot4.yml) 
 
 Trolleys fulfill orders one at a time by collecting goods from specific shelves. 
 Once they have picked up all the required items, they proceed to a designated pickup point and are ready for the next order.
@@ -50,7 +50,7 @@ The main plane is zoomable.
 
 <img width="810" alt="image" src="https://user-images.githubusercontent.com/56356131/224346942-696acf46-24dc-45a2-83ea-160f56a3d542.png">
 
-
+PS: please use the ThisWorks branch as we could not merge it properly to master.
 
 
 
